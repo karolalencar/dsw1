@@ -25,11 +25,11 @@ CREATE TABLE IF NOT EXISTS clients (
     telephone VARCHAR(14) NOT NULL,
 	gender VARCHAR(20) NOT NULL,
 	birth_date DATE NOT NULL,
-	
-	
-	
-	
-	
+	PRIMARY KEY(cpf),
+    CONSTRAINT fk_client_user
+        FOREIGN KEY(cpf)
+        REFERENCES users(cpf)
+        ON DELETE CASCADE	
 );
 
 CREATE TABLE IF  NOT EXISTS professionals (
