@@ -1,5 +1,8 @@
 # Atividade AA-1: Sistema para agendamento de consultas *online* com profissionais
-Corresponde ao requisito C1.
+Corresponde ao requisito C1. 
+Desenvolvedoras:
+*
+*
 
 ## Arquitetura: Modelo-Viaão-Controlador
 
