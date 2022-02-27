@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS administrators (
 );
 
 CREATE TABLE IF NOT EXISTS clients (
-	cpf varchar(11) NOT NULL,
+	cpf VARCHAR(11) NOT NULL,
     telephone VARCHAR(14) NOT NULL,
 	gender VARCHAR(20) NOT NULL,
 	birth_date DATE NOT NULL,
@@ -33,12 +33,20 @@ CREATE TABLE IF NOT EXISTS clients (
 );
 
 CREATE TABLE IF  NOT EXISTS professionals (
-
+	cpf VARCHAR(11) NOT NULL,
+	qualifications VARCHAR(100) NOT NULL,
+	knowledge_area VARCHAR(50) NOT NULL,
+	expertise VARCHAR(50) NOT NULL,
+	PRIMARY KEY(cpf),
+    CONSTRAINT fk_professional_user
+        FOREIGN KEY(cpf)
+        REFERENCES users(cpf)
+        ON DELETE CASCADE
 );
 
-INSERT INTO users(cpf, name, email, password, role) VALUES ("19", "vini", "vini@gmail.com", "oi", "ADMIN ")
-INSERT INTO clients(cpf, telephone, gender, birth_date) VALUES ("19", "98846-9932", "Masculino", "2020-10-10" )
+INSERT INTO users(cpf, name, email, password, role) 
+VALUES ("19", "vini", "vini@gmail.com", "oi", "ADMIN ");
 
-CREATE TABLE IF NOT EXISTS appointments (
+INSERT INTO clients(cpf, telephone, gender, birth_date) 
+VALUES ("19", "98846-9932", "Masculino", "2020-10-10");
 
-);
