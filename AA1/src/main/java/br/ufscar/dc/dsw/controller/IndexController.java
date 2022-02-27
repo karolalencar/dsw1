@@ -7,9 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import br.ufscar.dc.dsw.dao.ClientDAO;
-import br.ufscar.dc.dsw.domain.Client;
-import br.ufscar.dc.dsw.util.Error;
 
 @WebServlet(name = "Index", urlPatterns = {"/index*"})
 public class IndexController extends HttpServlet {
