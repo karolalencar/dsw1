@@ -15,18 +15,18 @@ CREATE TABLE IF NOT EXISTS administrators (
 	cpf VARCHAR(11) NOT NULL,
 	PRIMARY KEY(cpf),
 	CONSTRAINT fk_admin_user
-		FOREIGN KEY(cpf)
-		REFERENCES users(cpf)
-		ON DELETE CASCADE
+	FOREIGN KEY(cpf)
+	REFERENCES users(cpf)
+	ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS clients (
 	cpf VARCHAR(11) NOT NULL,
-    telephone VARCHAR(14) NOT NULL,
+    	telephone VARCHAR(14) NOT NULL,
 	gender VARCHAR(20) NOT NULL,
 	birth_date DATE NOT NULL,
 	PRIMARY KEY(cpf),
-    CONSTRAINT fk_client_user
+    	CONSTRAINT fk_client_user
         FOREIGN KEY(cpf)
         REFERENCES users(cpf)
         ON DELETE CASCADE	
@@ -38,7 +38,7 @@ CREATE TABLE IF  NOT EXISTS professionals (
 	knowledge_area VARCHAR(50) NOT NULL,
 	expertise VARCHAR(50) NOT NULL,
 	PRIMARY KEY(cpf),
-    CONSTRAINT fk_professional_user
+    	CONSTRAINT fk_professional_user
         FOREIGN KEY(cpf)
         REFERENCES users(cpf)
         ON DELETE CASCADE
