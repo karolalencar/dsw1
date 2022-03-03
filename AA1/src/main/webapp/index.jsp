@@ -14,7 +14,7 @@
 	        <link href="styles.css" rel="stylesheet" type="text/css"/>
 	    </head>
 	    <body>
-			<div>
+			<div class="menu">
 				<c:if test="${sessionScope.clienteLogado != null }">
 					<fmt:message key="index_hello_logged"/> ${sessionScope.clienteLogado.name}.
 				</c:if>
@@ -31,39 +31,29 @@
 				
 				<c:choose>
                     <c:when test="${sessionScope.clienteLogado == null && sessionScope.professionalLogged == null}">
-                    	<div class="menu">
-                    	<a href="login.jsp">Login</a><br>
-                    	<a href="clientes/cadastro">
-                    		<fmt:message key="client_registration"/> 
-                    	</a>
-                    	<br>
-                    	<a href="profissionais/cadastro">
-                    		<fmt:message key="professional_registration"/> 
-                    	</a>
-                    	<br>
-                    	<a href="profissionais/lista">
-                    		<fmt:message key="professional_list" />
-                    	</a>
-                    	</div>
+	                    <a class="btn-login" href="login.jsp">Login</a><br>
+	                    <a class="btn-login" href="profissionais/lista">
+	                    	<fmt:message key="professional_list" />
+	                    </a>
                   	</c:when>
 					<c:when test="${sessionScope.clienteLogado != null && sessionScope.professionalLogged == null}">
-                    	<div class="menu">
-                    	<br>
-                    	<a href="profissionais/lista">
-                    		<fmt:message key="professional_list" />
-                    	</a>
-						<br>
-						<a href="appointment/lista">
-                    		<fmt:message key="appointment_list" />
-                    	</a>
-						<br>
-						<a href="${pageContext.request.contextPath}/logout.jsp">
-                        	<fmt:message key="log_out"/> 
-                        </a>
+                    	<div>
+	                    	<br>
+	                    	<a href="profissionais/lista">
+	                    		<fmt:message key="professional_list" />
+	                    	</a>
+							<br>
+							<a href="appointment/lista">
+	                    		<fmt:message key="appointment_list" />
+	                    	</a>
+							<br>
+							<a href="${pageContext.request.contextPath}/logout.jsp">
+	                        	<fmt:message key="log_out"/> 
+	                        </a>
                     	</div>
                   	</c:when>
 					<c:when test="${sessionScope.clienteLogado == null && sessionScope.professionalLogged != null}">
-                    	<div class="menu">
+                    	<div>
                     	<br>
 						<a href="appointment/lista">
                     		<fmt:message key="appointment_list" />
@@ -76,6 +66,7 @@
                   	</c:when>
 				</c:choose>
 			</div>
+			<p><fmt:message key="schedule_manage" /><br><fmt:message key="appointments" /> </p>
 			<img src="./assets/img.svg" />			
 	    </body>
     </fmt:bundle>
