@@ -11,15 +11,6 @@ CREATE TABLE IF NOT EXISTS users (
 	PRIMARY KEY(cpf)
 );
 
-CREATE TABLE IF NOT EXISTS administrators (
-	cpf VARCHAR(11) NOT NULL,
-	PRIMARY KEY(cpf),
-	CONSTRAINT fk_admin_user
-	FOREIGN KEY(cpf)
-	REFERENCES users(cpf)
-	ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS clients (
 	cpf VARCHAR(11) NOT NULL,
     telephone VARCHAR(14) NOT NULL,
@@ -57,7 +48,10 @@ CREATE TABLE IF NOT EXISTS appointments (
 );
 
 INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("19", "vini", "vini@gmail.com", "oi", "ADMIN ");
+VALUES ("190", "vini", "vinii@gmail.com", "oi", "ADMIN ");
+
+INSERT INTO users(cpf, name, email, password, role) 
+VALUES ("19", "vini", "vini@gmail.com", "oi", "CLIENT");
 
 INSERT INTO clients(cpf, telephone, gender, birth_date) 
 VALUES ("19", "98846-9932", "Masculino", "2020-10-10");
@@ -66,7 +60,7 @@ INSERT INTO users(cpf, name, email, password, role)
 VALUES ("29", "Kico", "k@gmail.com", "abc", "PROF");
 
 INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
-VALUES ("29", "/curriculum", "Bacharel", "Inglês");
+VALUES ("29", "/curriculum", "Medicina", "Imunologia");
 
 INSERT INTO appointments(cpf_cliente, cpf_professional, data_consulta, hora_consulta) 
 VALUES('19', '29','2020-11-10', 11);
