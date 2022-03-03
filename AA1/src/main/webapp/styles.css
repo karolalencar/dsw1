@@ -1,0 +1,26 @@
+body {
+	background-color: #406553;	
+	font-family: sans-serif;
+}
+	        	
+div.menu {
+	display: flex;
+	justify-content: flex-end;
+	gap: 18px;
+	margin-top: 20px;
+	margin-right: 20px;
+	font-size: 24px;
+	color: #FFFFFF;
+}
+	        	
+a {
+	color: #FFFFFF;
+	font-size: 24px;
+	text-decoration: none;
+}
+	        	
+img {
+	 position: relative;
+	 left: 1250px;
+	 top: 350px;
+}

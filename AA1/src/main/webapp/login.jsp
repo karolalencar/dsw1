@@ -12,6 +12,9 @@
 
     </head>
     <body>
+        <%
+		    String contextPath = request.getContextPath().replace("/", "");
+		%>
         <c:if test="${mensagens.existeErros}">
             <div id="erro">
                 <ul>
@@ -34,7 +37,7 @@
                     <input type="password" name="cliente_senha" class="password" placeholder=<fmt:message key="str_pw"/>>
                 </div>
                 
-                <input type="submit" class="submit"  name="clienteOK" value=<fmt:message key="str_login"/>>
+                <input type="submit" class="submit" name="clienteOK" value=<fmt:message key="str_login"/>>
             </form>
         </div>
 

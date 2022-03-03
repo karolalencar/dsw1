@@ -37,7 +37,6 @@ public class ClientDAO extends GenericDAO {
             conn.close();
             
         } catch (SQLException e){
-            System.out.println("cheguei aki 1");
             throw new RuntimeException(e);
             
         }
@@ -59,7 +58,6 @@ public class ClientDAO extends GenericDAO {
             statementClient.close();
             conn.close();
         } catch (SQLException e){
-            System.out.println("cheguei aki 2");
             throw new RuntimeException(e);
         }
     }
@@ -69,7 +67,6 @@ public class ClientDAO extends GenericDAO {
         List<Client> clientList = new ArrayList<>();
 
         String sql= "SELECT * from clients INNER JOIN users ON clients.cpf=users.cpf";
-        String sqlUser = "SELECT * from users where cpf = ?";
 
         try {
             // Conectando no banco e realizando consulta
