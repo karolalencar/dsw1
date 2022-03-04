@@ -48,10 +48,13 @@ CREATE TABLE IF NOT EXISTS appointments (
 );
 
 INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("190", "vini", "vinii@gmail.com", "oi", "ADMIN ");
+VALUES ("190", "vini", "vinii@gmail.com", "oi", "ADMIN");
+
+INSERT INTO clients(cpf, telephone, gender, birth_date) 
+VALUES ("190", "98846-9932", "Masculino", "2020-10-10");
 
 INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("19", "vini", "vini@gmail.com", "oi", "CLIENT");
+VALUES ("19", "vini", "vini@gmail.com", "oi", "USER");
 
 INSERT INTO clients(cpf, telephone, gender, birth_date) 
 VALUES ("19", "98846-9932", "Masculino", "2020-10-10");
