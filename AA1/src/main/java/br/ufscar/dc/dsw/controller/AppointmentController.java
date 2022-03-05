@@ -1,8 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.AppointmentDAO;
-import br.ufscar.dc.dsw.dao.ClientDAO;
-import br.ufscar.dc.dsw.dao.ProfessionalDAO;
 import br.ufscar.dc.dsw.domain.Appointment;
 import br.ufscar.dc.dsw.domain.Client;
 import br.ufscar.dc.dsw.domain.Professional;
@@ -45,9 +43,6 @@ public class AppointmentController  extends HttpServlet{
             switch (action) {
                 case "/insercao":
                     insere(request, response);
-                    break;
-                case "/remocao":
-                    remove(request, response);
                     break;
                 default:
                     lista(request, response);
@@ -156,12 +151,7 @@ public class AppointmentController  extends HttpServlet{
         response.sendRedirect("/AA1/cliente/listProfessionals.jsp");
         return;
     }
-
-    private void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    }
-
-    
+   
 }
 
 

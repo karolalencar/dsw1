@@ -63,25 +63,21 @@
 							</select> <br/>
 						</c:if>
 						<fmt:message key="qualification"/> </br>
-						<input type="text" name="qualifications"/> <br/>
+						<div>
+							<form action="pdf/insercao" enctype="multipart/form-data" method="post">
+							<br/>
+								Digite o nome do PDF:
+								<input type="text" name="name"/> <br/><br/>
+								Coloque seu PDF:
+								<input name="upload" type="file" accept=".pdf"> <br/>
+								<input type="submit" name="enviar" value="Enviar" />
+							</form>	
+						</div>
 						<input type="submit" name="enviar" value="<fmt:message key="register"/>" />
 					</fieldset>
 				</form>
 			</div>
-			<div>
-			<form action="pdf/insercao" enctype="multipart/form-data" method="post">
-						<legend>
-							Registrando PDF no banco de dados
-						</legend>
-						<br/>
-						Digite o nome do PDF:
-						<input type="text" name="name"/> <br/><br/>
-						Coloque seu PDF:
-						<input name="upload" type="file" accept=".pdf"> <br/>
-						<input type="submit" name="enviar" value="Enviar" />
-					
-				</form>	
-		</div>
+			
 		</body>
 	</fmt:bundle>
 </html>

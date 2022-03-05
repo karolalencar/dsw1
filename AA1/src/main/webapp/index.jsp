@@ -19,6 +19,12 @@
                     <c:when test="${sessionScope.clienteLogado == null && sessionScope.professionalLogged == null}">
 	                    <div class="menu">
 	                    	<a class="btn-login" href="login.jsp">Login</a><br>
+							<a class="btn-login" href="clientes/cadastro">
+                    			<fmt:message key="client_registration"/> 
+                    		</a>
+							<a class="btn-login" href="profissionais/cadastro">
+                    			<fmt:message key="professional_registration"/> 
+                    		</a>
 	                    	<a class="btn-login" href="profissionais/lista">
 	                    		<fmt:message key="professional_list" />
 	                    	</a>
