@@ -98,6 +98,83 @@ public class ProfessionalDAO extends GenericDAO {
         return professionalList;
     }
 
+    public List<Professional> getAllByArea(String area) {
+
+        List<Professional> professionalList = new ArrayList<>();
+
+        String sql= "SELECT * from professionals INNER JOIN users ON professionals.cpf=users.cpf WHERE knowledge_area = '"+ area+ "'";
+
+        try {
+            // Conectando no banco e realizando consulta
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            
+
+            // Convertendo resultados para a classe interna Cliente
+            while (resultSet.next()) {
+                String cpf = resultSet.getString("cpf");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
+                String qualifications = resultSet.getString("qualifications");
+                String knowledge_area = resultSet.getString("knowledge_area");
+                String expertise = resultSet.getString("expertise");
+                
+                Professional professional = new Professional(cpf, name, email, password, role, qualifications, knowledge_area, expertise);
+                professionalList.add(professional);
+
+            }
+         
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return professionalList;
+    }
+
+    public List<Professional> getAllByExpertise(String expertise) {
+
+        List<Professional> professionalList = new ArrayList<>();
+
+        String sql= "SELECT * from professionals INNER JOIN users ON professionals.cpf=users.cpf WHERE expertise = " + expertise;
+
+        try {
+            // Conectando no banco e realizando consulta
+            Connection conn = this.getConnection();
+            Statement statement = conn.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+            
+
+            // Convertendo resultados para a classe interna Cliente
+            while (resultSet.next()) {
+                String cpf = resultSet.getString("cpf");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
+                String qualifications = resultSet.getString("qualifications");
+                String knowledge_area = resultSet.getString("knowledge_area");
+                
+                Professional professional = new Professional(cpf, name, email, password, role, qualifications, knowledge_area, expertise);
+                professionalList.add(professional);
+
+            }
+         
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return professionalList;
+    }
+
     public void delete(Professional professional){
         String sql = "Delete FROM users where cpf = ?";
 

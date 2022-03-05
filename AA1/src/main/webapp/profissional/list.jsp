@@ -29,6 +29,24 @@
 				</h2>
 			</div>
 			<div align="center">
+				<p>
+				<form action="/<%= contextPath%>/profissionais//profissionaisArea" method="get">
+					<fmt:message key="knowledge_area"/>: 
+					<select name="area_conhecimento">
+						<option value="Ciências Exatas e da Terra.">Ciências Exatas e da Terra</option>
+						<option value="Ciências Biológicas">Ciências Biológicas</option>
+						<option value="Engenharias">Engenharias</option>
+						<option value="Ciências da Saúde">Ciências da Saúde</option>
+						<option value="Ciências Agrárias">Ciências Agrárias</option>
+						<option value="Linguística, Letras e Artes">Linguística, Letras e Artes</option>
+						<option value="Ciências Sociais Aplicadas">Ciências Sociais Aplicadas</option>
+						<option value="Ciências Humanas">Ciências Humanas</option>
+					</select>
+					<input type="submit" value="<fmt:message key="filter"/>">
+				</p>
+				</form>
+			</div>
+			<div align="center">
 				<table border="1">
 					<caption>
 						<fmt:message key="professional_list"/>

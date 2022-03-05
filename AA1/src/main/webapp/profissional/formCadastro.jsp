@@ -54,11 +54,20 @@
 						<fmt:message key="expertise"/> </br>
 						<input type="text" name="expertise"/> <br/>
 						<fmt:message key="knowledge_area"/> </br>
-						<input type="text" name="knowledge_area"/> <br/>
+						<select name="knowledge_area" id="knowledge_area">
+							<option value="Ciências Exatas e da Terra">Ciências Exatas e da Terra</option>
+							<option value="Ciências Biológicas">Ciências Biológicas</option>
+							<option value="Engenharias">Engenharias</option>
+							<option value="Ciências da Saúde">Ciências da Saúde</option>
+							<option value="Ciências Agrárias">Ciências Agrárias</option>
+							<option value="Linguística, Letras e Artes">Linguística, Letras e Artes</option>
+							<option value="Ciências Sociais Aplicadas">Ciências Sociais Aplicadas</option>
+							<option value="Ciências Humanas">Ciências Humanas</option>
+						</select> <br/>
 						<c:if test="${sessionScope.professionalLogged != null  && sessionScope.professionalLogged.role == 'ADMIN'}">
 							<fmt:message key="role"/> </br>
 							<select name="role" id="role">
-								<option value="USER">PROF</option>
+								<option value="PROF">PROF</option>
 								<option value="ADMIN">ADMIN</option>
 							</select> <br/>
 						</c:if>

@@ -39,29 +39,26 @@ public class LoginController extends HttpServlet {
 			if (!erros.isExisteErros()) {
 				UserDAO daoUser = new UserDAO();
 				String role = daoUser.getRolebyLogin(login);
-				
-				if (role.equals("USER") || role.equals("ADMIN") ){ //Cliente	
-					ClientDAO dao = new ClientDAO();
-					Client client = dao.getbyLogin(login);
-					
-					if (client != null) {
+				ClientDAO daoClient = new ClientDAO();
+				Client client = daoClient.getbyLogin(login);
+				if (client != null) {
+					if (role.equals("CLIENT") || role.equals("ADMIN") ){ //Cliente	
 						if (client.getPassword().equals(password)) {
 							request.getSession().setAttribute("clienteLogado", client);
-							Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
+							
 							String URL = "/index.jsp";
 							RequestDispatcher rd = request.getRequestDispatcher(URL);
 							rd.forward(request, response);
 							return;
-							} else {
-								erros.add("Senha inválida!");
-							}
-						} else {
-							erros.add("Cliente não encontrado!");
-						}
+						}else{
+							erros.add("Senha inválida!");
+						}	
+					}
 				}
+				ProfessionalDAO dao = new ProfessionalDAO();
+				Professional professional = dao.getbyLogin(login);
 				if (role.equals("PROF")){ // Profissional
-					ProfessionalDAO dao = new ProfessionalDAO();
-					Professional professional = dao.getbyLogin(login);
+					
 					if (professional != null) {
 						if (professional.getPassword().equals(password)) {
 							request.getSession().setAttribute("professionalLogged", professional);
@@ -72,16 +69,17 @@ public class LoginController extends HttpServlet {
 						} else {
 							erros.add("Senha inválida!");
 						}
-					} else {
-						erros.add("Profissional não encontrado!");
-					}
+					} 
+				}
+				if(professional == null && client == null) {
+					erros.add("Cliente ou Profissional não encontrado!");
 				}
 			}
 		}
-		// Logout
+	
         request.getSession().invalidate();
 		request.setAttribute("mensagens", erros);
-		String URL = "/index.jsp";
+		String URL = "/login.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(URL);
 		rd.forward(request, response);
     }

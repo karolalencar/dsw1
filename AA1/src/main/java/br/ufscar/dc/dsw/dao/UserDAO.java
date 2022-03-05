@@ -21,14 +21,13 @@ public class UserDAO extends GenericDAO{
         try {
             // Conectando no banco e realizando consulta
             Connection conn = this.getConnection();
-            
             PreparedStatement statementUser = conn.prepareStatement(sqlUser);
             statementUser.setString(1, email);
             ResultSet resultSetUser = statementUser.executeQuery();
             // Convertendo resultados para a classe interna Cliente
             
             if (resultSetUser.next()) {
-                role = resultSetUser.getString("role");      
+                role = resultSetUser.getString("role");
             }
             
             resultSetUser.close();

@@ -35,9 +35,10 @@ public class ClientController  extends HttpServlet{
 	@Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
                 String action = request.getPathInfo();
+                
                 if (action == null) {
-                action = "";
-        }
+                    action = "";
+                }
         
         try {
             switch (action) {
@@ -109,7 +110,7 @@ public class ClientController  extends HttpServlet{
         String telephone = request.getParameter("telephone");
         String role = request.getParameter("role");
         if (role == null || role.equals("")) {
-            role = "USER";
+            role = "CLIENT";
         }
         LocalDate birth_date = LocalDate.now();
         try {
@@ -133,13 +134,17 @@ public class ClientController  extends HttpServlet{
         }
         Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
 
-        if(clienteLogado.getRole().equals("ADMIN")){
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/clientes");
-            dispatcher.forward(request, response);
-            
+        if( clienteLogado != null ){
+            if(clienteLogado.getRole().equals("ADMIN")){
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/clientes");
+                dispatcher.forward(request, response);
+            }
         }else{
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            //RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
+            //dispatcher.forward(request, response);
+            //String path = request.getRequestURI();
+            //System.out.print("\n"+ path);
+            response.sendRedirect("/AA1/login.jsp");  
         }
         
     }
