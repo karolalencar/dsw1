@@ -51,7 +51,16 @@ INSERT INTO users(cpf, name, email, password, role)
 VALUES ("190", "vini", "vinii@gmail.com", "oi", "ADMIN");
 
 INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("19", "vini", "vini@gmail.com", "oi", "CLIENT");
+VALUES ("13", "vini", "prof@gmail.com", "oi", "PROF");
+
+INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
+VALUES ("13", "/curriculum", "Medicina", "Imunologia");
+
+INSERT INTO clients(cpf, telephone, gender, birth_date) 
+VALUES ("190", "98846-9932", "Masculino", "2020-10-10");
+
+INSERT INTO users(cpf, name, email, password, role) 
+VALUES ("19", "vini", "vini@gmail.com", "oi", "USER");
 
 INSERT INTO clients(cpf, telephone, gender, birth_date) 
 VALUES ("19", "98846-9932", "Masculino", "2020-10-10");

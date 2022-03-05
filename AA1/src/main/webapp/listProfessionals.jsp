@@ -6,9 +6,25 @@
 
 <html>
 	<fmt:bundle basename="msgs">
-		<head>
-			<title>
-				<fmt:message key="professional_managing"/>
+	<head>
+		<title>
+			<fmt:message key="professional_managing"/>
+		</title>
+		<link href="styles.css" rel="stylesheet" type="text/css"/>
+	</head>
+	<body>
+		<%
+			String contextPath = request.getContextPath().replace("/", "");
+		%>
+		<div class="abc">
+			<h2>
+				<a href="/<%=contextPath%>">
+					<fmt:message key="main_menu"/>
+				</a>
+			</h2>
+		</div>
+			
+		<div align="center">
 			</title>
 			<script src="js/ajaxExpertise.js"></script> <!-- <- Não está funcionando, não sei pq-->
 			<script>

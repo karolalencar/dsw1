@@ -8,7 +8,7 @@ public class Appointment {
     private LocalDate dataConsulta;
     private Integer horaConsulta;
 
-    public Appointment(String cpfCliente, String cpfProfissional,LocalDate dataConsulta, Integer horaConsulta) {
+    public Appointment(String cpfCliente, String cpfProfissional, LocalDate dataConsulta, Integer horaConsulta) {
         this.setCpfCliente(cpfCliente);
         this.setCpfProfissional(cpfProfissional);
         this.setDataConsulta(dataConsulta);

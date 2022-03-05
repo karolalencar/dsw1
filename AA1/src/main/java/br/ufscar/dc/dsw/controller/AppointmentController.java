@@ -6,9 +6,7 @@ import br.ufscar.dc.dsw.domain.Client;
 import br.ufscar.dc.dsw.domain.Professional;
 import br.ufscar.dc.dsw.util.Error;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,9 +43,6 @@ public class AppointmentController  extends HttpServlet{
             switch (action) {
                 case "/insercao":
                     insere(request, response);
-                    break;
-                case "/remocao":
-                    remove(request, response);
                     break;
                 default:
                     lista(request, response);
@@ -88,15 +83,75 @@ public class AppointmentController  extends HttpServlet{
         
     }
 
-    private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-    }
+    private void insere(HttpServletRequest request, HttpServletResponse response) 
+    		throws ServletException, IOException {
+    	Error erros = new Error();
+    	Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
+        Professional professionalLogged = (Professional) request.getSession().getAttribute("professionalLogged");
+       
+        if (clienteLogado == null) {
+            erros.add("Necessita estar logado para acessar essa página.");
 
-    private void remove(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            request.setAttribute("mensagens", erros);
+            String URL = "/login.jsp";
+            RequestDispatcher rd = request.getRequestDispatcher(URL);
+		    rd.forward(request, response);
+            return;
+        }
+        if (clienteLogado != null) {
+            request.setCharacterEncoding("UTF-8");
+            String hora = request.getParameter("horario");
+        	hora = hora.substring(0, 2);
+        	Integer horaConsulta = Integer.parseInt(hora);
+        	String videoConf = request.getParameter("videoConf");
+        	String cpfCliente = request.getParameter("cpfCliente");
+        	String cpfProfessional = request.getParameter("cpfProfissional");
+        	LocalDate dataConsulta = LocalDate.now();
+            try {
+                dataConsulta = LocalDate.parse(request.getParameter("data"));
+            } catch (Exception e) {
+                dataConsulta = LocalDate.now();
+            }
+            
+            if (request.getParameter("data") != null && request.getParameter("horario") != null && request.getParameter("appointmentOK") != null) {
+            	AppointmentDAO appointmentDao = new AppointmentDAO();
+            	
+            	Appointment appointment = new Appointment(cpfCliente, cpfProfessional, dataConsulta, horaConsulta);
+            	
+            	List<Appointment> appointmentList = appointmentDao.getAllByProfessional(cpfProfessional);
+            	
+            	boolean existe = false;
+            	
+            	for (Appointment i : appointmentList) {
+            		if (i.getCpfCliente().equals(cpfCliente) && i.getDataConsulta().equals(dataConsulta) && i.getHoraConsulta().equals(horaConsulta)) {
+            			existe = true;
+            		}
+            		if (i.getCpfProfissional().contentEquals(cpfProfessional) && i.getDataConsulta().equals(dataConsulta) && i.getHoraConsulta().equals(horaConsulta) ) {
+            			existe = true;
+            		}
+            		
+            	}
+            	if (!existe) {
+                    dao.insert(appointment);
+                    String URL = "/listProfessionals.jsp"; 
+                    RequestDispatcher rd = request.getRequestDispatcher(URL);
+                    rd.forward(request, response);
+            	} else {
+                    erros.add("O horário escolhido já está ocupado por você ou pelo profissional.");
+                    request.setAttribute("mensagens", erros);
+                    String URL = "/appointment";
+                    RequestDispatcher rd = request.getRequestDispatcher(URL);
+                    rd.forward(request, response);
+                    return;
+            	}
+            }
+        }
         
+        
+        response.sendRedirect("/AA1/cliente/listProfessionals.jsp");
+        return;
     }
-
-    
+   
 }
 
 
