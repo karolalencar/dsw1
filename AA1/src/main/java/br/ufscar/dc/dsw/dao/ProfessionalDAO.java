@@ -137,11 +137,11 @@ public class ProfessionalDAO extends GenericDAO {
         return professionalList;
     }
 
-    public List<Professional> getAllByExpertise(String expertise) {
+    public List<Professional> getAllByAreaExpertise(String area, String expertise) {
 
         List<Professional> professionalList = new ArrayList<>();
 
-        String sql= "SELECT * from professionals INNER JOIN users ON professionals.cpf=users.cpf WHERE expertise = " + expertise;
+        String sql= "SELECT * from professionals INNER JOIN users ON professionals.cpf=users.cpf WHERE knowledge_area = '"+ area+ "' AND expertise = '"+ expertise+ "'";
 
         try {
             // Conectando no banco e realizando consulta
@@ -174,6 +174,7 @@ public class ProfessionalDAO extends GenericDAO {
         }
         return professionalList;
     }
+
 
     public void delete(Professional professional){
         String sql = "Delete FROM users where cpf = ?";
