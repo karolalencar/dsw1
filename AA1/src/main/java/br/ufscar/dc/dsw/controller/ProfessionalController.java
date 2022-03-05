@@ -58,6 +58,12 @@ public class ProfessionalController  extends HttpServlet{
                 case "/atualizacao":
                     atualize(request, response);
                     break;
+                case "/profissionaisArea":
+                    professionalsByArea(request, response);
+                    break;   
+                case "/profissionais/buscaPorAreaJS":
+                    buscaPorAreaJS(request, response);
+                    break;  
                 default:
                     lista(request, response);
                     break;
@@ -80,7 +86,45 @@ public class ProfessionalController  extends HttpServlet{
             dispatcher = request.getRequestDispatcher("/listProfessionals.jsp");
         }
         else if(clienteLogado != null){
-            if(clienteLogado.getRole().equals("USER")){
+            if(clienteLogado.getRole().equals("CLIENT")){
+                dispatcher = request.getRequestDispatcher("/cliente/listProfessionals.jsp");
+            }else if(clienteLogado.getRole().equals("ADMIN")){
+                dispatcher = request.getRequestDispatcher("/profissional/list.jsp");
+            }   
+        }
+        else if(professionalLogged != null){
+            if(professionalLogged.getRole().equals("ADMIN") ){
+                dispatcher = request.getRequestDispatcher("/profissional/list.jsp");
+            }
+        }
+        dispatcher.forward(request, response);
+    }
+
+    private void professionalsByArea(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Error erros = new Error();
+        Professional professionalLogged = (Professional) request.getSession().getAttribute("professionalLogged");
+        Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
+        String area = request.getParameter("area_conhecimento");
+        String expertise = request.getParameter("expertise");
+        
+        if(expertise == ""){
+            List<Professional> professionalsList = dao.getAllByArea(area);
+            request.setAttribute("professionalsList", professionalsList);
+            request.setAttribute("areaConhecimento", area);
+        }else{
+            List<Professional> professionalsList = dao.getAllByAreaExpertise(area, expertise);
+            request.setAttribute("professionalsList", professionalsList);
+            request.setAttribute("areaConhecimento", area);
+        }
+        
+        
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/profissional/list.jsp");
+        
+        if(clienteLogado == null && professionalLogged == null){
+            dispatcher = request.getRequestDispatcher("/listProfessionals.jsp");
+        }
+        else if(clienteLogado != null){
+            if(clienteLogado.getRole().equals("CLIENT")){
                 dispatcher = request.getRequestDispatcher("/cliente/listProfessionals.jsp");
             }else if(clienteLogado.getRole().equals("ADMIN")){
                 dispatcher = request.getRequestDispatcher("/profissional/list.jsp");
@@ -93,7 +137,27 @@ public class ProfessionalController  extends HttpServlet{
         }
         dispatcher.forward(request, response);
 
+    }
+
+    private void buscaPorAreaJS(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        String area = request.getParameter("area");
+
+        String buffer = "<tr><td>Expertise</td><td><select id='expertise' name='expertise' "
+                + "onchange='apresenta()'>";
+        buffer = buffer + "<option value=''>Selecione</option>";
+
+        List<Professional> professionalsList = dao.getAllByArea(area);
+
+        for (Professional professional : professionalsList) {
+            buffer = buffer + "<option value='" + professional.getExpertise() + "'>" + professional.getExpertise()  + "</option>";
+        }
+        buffer = buffer + "</select></td>";
         
+        
+        //System.out.println(buffer);
+        response.getWriter().println(buffer);
     }
 
     private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -135,8 +199,9 @@ public class ProfessionalController  extends HttpServlet{
                 dispatcher.forward(request, response);
             }
         }else{
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(request, response);
+            //RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+            //dispatcher.forward(request, response);
+            response.sendRedirect("/AA1/login.jsp");
         }
         
     }

@@ -17,6 +17,7 @@
 			<div >				
 				<c:choose>
                     <c:when test="${sessionScope.clienteLogado == null && sessionScope.professionalLogged == null}">
+
 	                    <div class="menu">
 	                    	<a class="btn-login" href="login.jsp">Login</a><br>
 							<a class="btn-login" href="clientes/cadastro">
@@ -30,7 +31,8 @@
 	                    	</a>
 	                    </div>
 	                    <p><fmt:message key="schedule_manage" /><br><fmt:message key="appointments" /> </p>
-						<img src="./assets/img.svg" />
+						          <img src="./assets/img.svg" />
+
                   	</c:when>
 					<c:when test="${sessionScope.clienteLogado != null && sessionScope.professionalLogged == null}">
                     	<div class="menu">
