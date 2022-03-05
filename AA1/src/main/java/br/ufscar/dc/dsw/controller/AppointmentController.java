@@ -94,7 +94,7 @@ public class AppointmentController  extends HttpServlet{
     	Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
         Professional professionalLogged = (Professional) request.getSession().getAttribute("professionalLogged");
        
-        if (clienteLogado == null && professionalLogged == null) {
+        if (clienteLogado == null) {
             erros.add("Necessita estar logado para acessar essa página.");
 
             request.setAttribute("mensagens", erros);
@@ -104,25 +104,23 @@ public class AppointmentController  extends HttpServlet{
             return;
         }
         if (clienteLogado != null) {
-        	ProfessionalDAO professionalDao = new ProfessionalDAO();
-            Professional professional = professionalDao.get(professionalLogged.getCpf());
-            request.setAttribute("professional", professional);
+            request.setCharacterEncoding("UTF-8");
+            String hora = request.getParameter("horario");
+        	hora = hora.substring(0, 2);
+        	Integer horaConsulta = Integer.parseInt(hora);
+        	String videoConf = request.getParameter("videoConf");
+        	String cpfCliente = request.getParameter("cpfCliente");
+        	String cpfProfessional = request.getParameter("cpfProfissional");
+        	LocalDate dataConsulta = LocalDate.now();
+            try {
+                dataConsulta = LocalDate.parse(request.getParameter("data"));
+            } catch (Exception e) {
+                dataConsulta = LocalDate.now();
+            }
             
             if (request.getParameter("data") != null && request.getParameter("horario") != null && request.getParameter("appointmentOK") != null) {
             	AppointmentDAO appointmentDao = new AppointmentDAO();
-            	ClientDAO clientDao = new ClientDAO();
             	
-            	
-            	Integer horaConsulta = Integer.parseInt(request.getParameter("horario"));
-            	String videoConf = request.getParameter("videoConf");
-            	String cpfCliente = request.getParameter("cpfCliente");
-            	String cpfProfessional = request.getParameter("");
-            	LocalDate dataConsulta = LocalDate.now();
-                try {
-                    dataConsulta = LocalDate.parse(request.getParameter("data"));
-                } catch (Exception e) {
-                    dataConsulta = LocalDate.now();
-                }
             	Appointment appointment = new Appointment(cpfCliente, cpfProfessional, dataConsulta, horaConsulta);
             	
             	List<Appointment> appointmentList = appointmentDao.getAllByProfessional(cpfProfessional);
@@ -130,25 +128,26 @@ public class AppointmentController  extends HttpServlet{
             	boolean existe = false;
             	
             	for (Appointment i : appointmentList) {
-            		if (i.getCpfCliente().equals(cpfCliente)) {
-            			if (i.getDataConsulta().equals(dataConsulta) && i.getHoraConsulta().equals(horaConsulta)) {
-            				existe = true;
-            			}
-            		} else {
-            			if (!existe) {
-                            dao.insert(appointment);
-                            String URL = "/listProfessionals.jsp"; 
-                            RequestDispatcher rd = request.getRequestDispatcher(URL);
-                            rd.forward(request, response);
-                        } else {
-                            erros.add("O horário escolhido já está ocupado por você ou pelo profissional.");
-                            request.setAttribute("mensagens", erros);
-                            String URL = "/cliente";
-                            RequestDispatcher rd = request.getRequestDispatcher(URL);
-                            rd.forward(request, response);
-                            return;
-                        }
+            		if (i.getCpfCliente().equals(cpfCliente) && i.getDataConsulta().equals(dataConsulta) && i.getHoraConsulta().equals(horaConsulta)) {
+            			existe = true;
             		}
+            		if (i.getCpfProfissional().contentEquals(cpfProfessional) && i.getDataConsulta().equals(dataConsulta) && i.getHoraConsulta().equals(horaConsulta) ) {
+            			existe = true;
+            		}
+            		
+            	}
+            	if (!existe) {
+                    dao.insert(appointment);
+                    String URL = "/listProfessionals.jsp"; 
+                    RequestDispatcher rd = request.getRequestDispatcher(URL);
+                    rd.forward(request, response);
+            	} else {
+                    erros.add("O horário escolhido já está ocupado por você ou pelo profissional.");
+                    request.setAttribute("mensagens", erros);
+                    String URL = "/appointment";
+                    RequestDispatcher rd = request.getRequestDispatcher(URL);
+                    rd.forward(request, response);
+                    return;
             	}
             }
         }

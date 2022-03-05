@@ -37,7 +37,6 @@
 					<th><fmt:message key="cpf"/></th>
 					<th><fmt:message key="name"/></th>
 					<th><fmt:message key="email"/></th>
-					<th><fmt:message key="role"/></th>
 					<th><fmt:message key="qualification"/></th>
 					<th><fmt:message key="knowledge_area"/></th>
 					<th><fmt:message key="expertise"/></th>
@@ -47,11 +46,9 @@
 						<td>${profissional.cpf}</td>
 						<td>${profissional.name}</td>
 						<td>${profissional.email}</td>
-						<td>${profissional.role}</td>
-							
 						<td>${profissional.qualifications}</td>
 						<td>${profissional.knowledgeArea}</td>
-                           <td>${profissional.expertise}</td>
+                        <td>${profissional.expertise}</td>
 					</tr>
 				</c:forEach>
 			</table>

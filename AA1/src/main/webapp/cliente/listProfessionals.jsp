@@ -36,6 +36,7 @@
 						<th><fmt:message key="qualification"/></th>
 						<th><fmt:message key="knowledge_area"/></th>
 						<th><fmt:message key="expertise"/></th>
+						<th><fmt:message key="schedulling" /></th>
 					</tr>
 					<c:forEach var="profissional" items="${requestScope.professionalsList}">
 						<tr>
@@ -46,8 +47,8 @@
 							<td>${profissional.knowledgeArea}</td>
                             <td>${profissional.expertise}</td>
                             <td>
-                            	<a href="${pageContext.request.contextPath}/cliente/formConsulta.jsp"><fmt:message key="btn_schedulling" /> </a>
-                            </td>
+                            	<a href="${pageContext.request.contextPath}/cliente/formConsulta.jsp?cpfProf=${profissional.cpf}"><fmt:message key="btn_schedulling" /> </a>
+                            </td>                           
 						</tr>
 					</c:forEach>
 				</table>
