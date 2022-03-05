@@ -59,7 +59,7 @@
 						<input type="text" name="birthDate" value="${cliente.birthDate}"/> <br/>
 						<fmt:message key="role"/> </br>
 							<select name="role" id="role">
-								<option value="USER">USER</option>
+								<option value="CLIENT">CLIENT</option>
 								<option value="ADMIN">ADMIN</option>
 							</select> <br/>
 						<input type="submit" name="enviar" value="<fmt:message key="update"/>" />

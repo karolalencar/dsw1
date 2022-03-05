@@ -54,7 +54,7 @@
 						<c:if test="${sessionScope.clienteLogado != null  && sessionScope.clienteLogado.role == 'ADMIN'}">
 							<fmt:message key="role"/> </br>
 							<select name="role" id="role">
-								<option value="USER">USER</option>
+								<option value="CLIENT">CLIENT</option>
 								<option value="ADMIN">ADMIN</option>
 							</select> <br/>
 						</c:if>
