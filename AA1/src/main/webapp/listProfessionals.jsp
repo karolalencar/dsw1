@@ -11,32 +11,10 @@
 			<fmt:message key="professional_managing"/>
 		</title>
 		<link href="styles.css" rel="stylesheet" type="text/css"/>
-	</head>
-	<body>
-		<%
-			String contextPath = request.getContextPath().replace("/", "");
-		%>
-		<div class="abc">
-			<h2>
-				<a href="/<%=contextPath%>">
-					<fmt:message key="main_menu"/>
-				</a>
-			</h2>
-		</div>
-			
-		<div align="center">
-			</title>
-			<script src="js/ajaxExpertise.js"></script> <!-- <- Não está funcionando, não sei pq-->
-			<script>
+		<script src="js/ajaxExpertise.js"></script> <!-- <- Não está funcionando, não sei pq-->
+		<script>
 				var xmlHttp;
 
-				/*function apresenta() {
-					var cidade = document.getElementById("area");
-					var estado = document.getElementById("expertise");
-					var selArea = area.options[cidade.selectedIndex].value; 
-					var selExpertise = expertise.options[estado.selectedIndex].value;
-					alert("Selecionado: " + selArea + "/" + selExpertise); 
-				}*/
 
 				function areaSelecionada(str) {
 					if (typeof XMLHttpRequest !== "undefined") {
@@ -63,7 +41,8 @@
 					}
 				}
 			</script>
-		</head>
+	</head>
+	
 		<body>
 			<%
 				String contextPath = request.getContextPath().replace("/", "");

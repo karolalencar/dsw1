@@ -47,6 +47,13 @@ CREATE TABLE IF NOT EXISTS appointments (
 	CONSTRAINT hora_limite_superior CHECK (hora_consulta < 24)
 );
 
+
+INSERT INTO users(cpf, name, email, password, role) 
+VALUES ("10", "vini", "admin@gmail.com", "oi", "ADMIN");
+
+INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
+VALUES ("10", "/curriculum", "Medicina", "Imunologia");
+
 INSERT INTO users(cpf, name, email, password, role) 
 VALUES ("190", "vini", "vinii@gmail.com", "oi", "ADMIN");
 
@@ -60,7 +67,7 @@ INSERT INTO clients(cpf, telephone, gender, birth_date)
 VALUES ("190", "98846-9932", "Masculino", "2020-10-10");
 
 INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("19", "vini", "vini@gmail.com", "oi", "USER");
+VALUES ("19", "vini", "vini@gmail.com", "oi", "CLIENT");
 
 INSERT INTO clients(cpf, telephone, gender, birth_date) 
 VALUES ("19", "98846-9932", "Masculino", "2020-10-10");

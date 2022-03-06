@@ -4,38 +4,34 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
 
 import br.ufscar.dc.dsw.domain.Professional;
 
 public class ProfessionalDAO extends GenericDAO {
 
     public void insert(Professional professional){
-        String sqlUsers = "INSERT INTO users(cpf, name, email, password, role)";
+        String sqlUsers = "INSERT INTO users(name, email, cpf, password, role)";
         sqlUsers += " VALUES(?, ?, ?, ?, ?)";
         
         try{
-            
             Connection conn = this.getConnection();
             PreparedStatement statementUsers = conn.prepareStatement(sqlUsers);
             statementUsers = conn.prepareStatement(sqlUsers);
             
-            
-            statementUsers.setString(1, professional.getCpf());
-            statementUsers.setString(2, professional.getName());
-            statementUsers.setString(3, professional.getEmail());
+            statementUsers.setString(1, professional.getName());
+            statementUsers.setString(2, professional.getEmail());
+            statementUsers.setString(3, professional.getCpf());
             statementUsers.setString(4, professional.getPassword());
             statementUsers.setString(5, professional.getRole());
+
             statementUsers.executeUpdate();
-            
             statementUsers.close();
             conn.close();
-            
         } catch (SQLException e){
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
 
@@ -45,7 +41,7 @@ public class ProfessionalDAO extends GenericDAO {
             Connection conn = this.getConnection();
             PreparedStatement statementProfessional = conn.prepareStatement(sqlProfessionals);
             statementProfessional = conn.prepareStatement(sqlProfessionals);
-
+            
             statementProfessional.setString(1, professional.getCpf());
             statementProfessional.setString(2, professional.getQualifications());
             statementProfessional.setString(3, professional.getKnowledgeArea());
@@ -55,6 +51,7 @@ public class ProfessionalDAO extends GenericDAO {
             statementProfessional.close();
             conn.close();
         } catch (SQLException e){
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
     }
@@ -93,6 +90,7 @@ public class ProfessionalDAO extends GenericDAO {
             statement.close();
             conn.close();
         } catch (SQLException e) {
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
         return professionalList;
@@ -132,6 +130,7 @@ public class ProfessionalDAO extends GenericDAO {
             statement.close();
             conn.close();
         } catch (SQLException e) {
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
         return professionalList;
@@ -170,6 +169,7 @@ public class ProfessionalDAO extends GenericDAO {
             statement.close();
             conn.close();
         } catch (SQLException e) {
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
         return professionalList;
@@ -189,6 +189,7 @@ public class ProfessionalDAO extends GenericDAO {
             statement.close();
             conn.close();
         } catch (SQLException e) {
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
     }
@@ -222,6 +223,7 @@ public class ProfessionalDAO extends GenericDAO {
             statementProfessional.close();
             conn.close();
         } catch (SQLException e) {
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
     }
@@ -263,6 +265,7 @@ public class ProfessionalDAO extends GenericDAO {
             statementUser.close();
             conn.close();
         } catch (SQLException e) {
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
         return professional;
@@ -308,6 +311,7 @@ public class ProfessionalDAO extends GenericDAO {
             statementUser.close();
             conn.close();
         } catch (SQLException e) {
+        	System.out.println("ERRO: " + e);
             throw new RuntimeException(e);
         }
 
