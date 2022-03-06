@@ -238,9 +238,10 @@ public class ProfessionalController  extends HttpServlet{
 
     private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Error erros = new Error();
-        Professional professionalLogged = (Professional) request.getSession().getAttribute("clienteLogado");
-        
-        if (professionalLogged == null) {
+        Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
+        System.out.print("cheguei aqui 1");
+        if (clienteLogado == null) {
+            System.out.print("cheguei aqui 1");
             erros.add("Precisa estar logado para acessar essa página.");
 
             request.setAttribute("mensagens", erros);
@@ -248,7 +249,7 @@ public class ProfessionalController  extends HttpServlet{
             RequestDispatcher rd = request.getRequestDispatcher(URL);
 		    rd.forward(request, response);
             return;
-        } else if (!professionalLogged.getRole().equals("ADMIN")) {
+        } else if (!clienteLogado.getRole().equals("ADMIN")) {
             erros.add("Não possui permissão de acesso.");
             erros.add("Apenas [ADMIN] pode acessar essa página.");
 
@@ -269,9 +270,9 @@ public class ProfessionalController  extends HttpServlet{
 
     private void atualize(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Error erros = new Error();
-        Professional professionalLogged = (Professional) request.getSession().getAttribute("professionalLogged");
+        Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
         
-        if (professionalLogged == null) {
+        if (clienteLogado == null) {
             erros.add("Precisa estar logado para acessar essa página.");
 
             request.setAttribute("mensagens", erros);
@@ -279,7 +280,7 @@ public class ProfessionalController  extends HttpServlet{
             RequestDispatcher rd = request.getRequestDispatcher(URL);
 		    rd.forward(request, response);
             return;
-        } else if (!professionalLogged.getRole().equals("ADMIN")) {
+        } else if (!clienteLogado.getRole().equals("ADMIN")) {
             erros.add("Não possui permissão de acesso.");
             erros.add("Apenas [ADMIN] pode acessar essa página.");
 
@@ -327,7 +328,7 @@ public class ProfessionalController  extends HttpServlet{
         	expertise = professional.getExpertise();
         }
 
-        Professional updateProfessional = new Professional(cpf, name, email, password, qualifications, knowledge_area, role, expertise);
+        Professional updateProfessional = new Professional(cpf, name, email, password, role, qualifications, knowledge_area, expertise);
         try {
             dao.update(updateProfessional);
         } catch (Exception e) {

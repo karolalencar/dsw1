@@ -196,7 +196,7 @@ public class ProfessionalDAO extends GenericDAO {
 
     public void update(Professional professional){
         String sqlUser = "UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE cpf = ?";
-        String sqlProfessional = "UPDATE professionals SET qualifications = ?, knowledge_are = ?, expertise = ? WHERE cpf = ?";
+        String sqlProfessional = "UPDATE professionals SET qualifications = ?, knowledge_area = ?, expertise = ? WHERE cpf = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -256,7 +256,7 @@ public class ProfessionalDAO extends GenericDAO {
                 String role = resultSetUser.getString("role");
                                     
                 
-                professional = new Professional(cpf, name, email, password, qualifications, knowledge_area, expertise, role);
+                professional = new Professional(cpf, name, email, password, role, qualifications, knowledge_area, expertise);
             }
            
             resultSetUser.close();
