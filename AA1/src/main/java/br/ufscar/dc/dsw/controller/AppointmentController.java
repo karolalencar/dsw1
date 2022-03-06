@@ -118,22 +118,29 @@ public class AppointmentController  extends HttpServlet{
             	
             	Appointment appointment = new Appointment(cpfCliente, cpfProfessional, dataConsulta, horaConsulta);
             	
-            	List<Appointment> appointmentList = appointmentDao.getAllByProfessional(cpfProfessional);
-            	
             	boolean existe = false;
             	
-            	for (Appointment i : appointmentList) {
+            	List<Appointment> clientAppointments = appointmentDao.getAllByClient(cpfCliente);
+            	
+            	for (Appointment i : clientAppointments) {
             		if (i.getCpfCliente().equals(cpfCliente) && i.getDataConsulta().equals(dataConsulta) && i.getHoraConsulta().equals(horaConsulta)) {
             			existe = true;
             		}
-            		if (i.getCpfProfissional().contentEquals(cpfProfessional) && i.getDataConsulta().equals(dataConsulta) && i.getHoraConsulta().equals(horaConsulta) ) {
-            			existe = true;
+            		else {
+            			List<Appointment> professionalAppointments = appointmentDao.getAllByProfessional(cpfProfessional);
+            			for (Appointment j : professionalAppointments) {
+            				if (j.getDataConsulta().equals(dataConsulta) && j.getHoraConsulta().equals(horaConsulta)) {
+            					existe = true;
+            				}
+            			}
             		}
             		
             	}
+            	
+            	
             	if (!existe) {
                     dao.insert(appointment);
-                    String URL = "/listProfessionals.jsp"; 
+                    String URL = "/appointment"; 
                     RequestDispatcher rd = request.getRequestDispatcher(URL);
                     rd.forward(request, response);
             	} else {
