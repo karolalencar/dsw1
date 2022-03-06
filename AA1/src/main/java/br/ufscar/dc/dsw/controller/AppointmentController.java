@@ -192,7 +192,7 @@ public class AppointmentController  extends HttpServlet{
         
         MimeMessage message = new MimeMessage(session);
         String emailCliente = client.getEmail();
-        String htmlMessage = "<h2>Consulta</h2><p>Olá "+ client.getName()+", sua consulta com "+ professional.getName()+"foi marcada para o dia "+appointment.getDataConsulta()+" às "+appointment.getHoraConsulta()+"h. O link da vídeo conferência é + "+request.getParameter("videoConf")+"</p>";
+        String htmlMessage = "<h2>Consulta</h2><p>Olá "+ client.getName()+", sua consulta com "+ professional.getName()+" foi marcada para o dia "+appointment.getDataConsulta()+" às "+appointment.getHoraConsulta()+"h. O link da vídeo conferência é: " + request.getParameter("videoConf")+"</p>";
         message.setContent( htmlMessage, "text/html; charset=utf-8");
         message.setFrom(new InternetAddress("consultaprofissionais1@gmail.com"));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailCliente));
