@@ -48,36 +48,32 @@ CREATE TABLE IF NOT EXISTS appointments (
 );
 
 
-INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("10", "vini", "admin@gmail.com", "oi", "ADMIN");
+INSERT INTO users (cpf, name, email, password, role)
+VALUES ("1", "Admin", "admin@admin.com", "admin", "ADMIN");
 
-INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
-VALUES ("10", "/curriculum", "Medicina", "Imunologia");
+INSERT INTO users (cpf, name, email, password, role)
+VALUES ("2", "Client", "client@client.com", "client", "CLIENT");
 
-INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("190", "vini", "vinii@gmail.com", "oi", "ADMIN");
+INSERT INTO clients (cpf, telephone, gender, birth_date) 
+VALUES ("2", "9 9999-9999", "M", "2020-10-10");
 
-INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("13", "vini", "prof@gmail.com", "oi", "PROF");
+INSERT INTO users (cpf, name, email, password, role)
+VALUES ("3", "Prof", "prof@prof.com", "prof", "PROF");
 
-INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
-VALUES ("13", "/curriculum", "Medicina", "Imunologia");
+INSERT INTO professionals (cpf, qualifications, knowledge_area, expertise)
+VALUES ("3", "/curriculum", "Engenharias", "Industrial");
 
-INSERT INTO clients(cpf, telephone, gender, birth_date) 
-VALUES ("190", "98846-9932", "Masculino", "2020-10-10");
+INSERT INTO users (cpf, name, email, password, role)
+VALUES ("4", "Client2", "client2@client.com", "client2", "ADMIN");
 
-INSERT INTO users(cpf, name, email, password, role) 
-VALUES ("19", "vini", "vini@gmail.com", "oi", "CLIENT");
+INSERT INTO clients (cpf, telephone, gender, birth_date) 
+VALUES ("4", "9 9999-9999", "M", "2020-10-10");
 
-INSERT INTO clients(cpf, telephone, gender, birth_date) 
-VALUES ("19", "98846-9932", "Masculino", "2020-10-10");
+INSERT INTO users (cpf, name, email, password, role)
+VALUES ("5", "Prof2", "prof2@prof.com", "prof2", "ADMIN");
 
-INSERT INTO users(cpf, name, email, password, role)
-VALUES ("29", "Kico", "k@gmail.com", "abc", "PROF");
-
-INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
-VALUES ("29", "/curriculum", "Medicina", "Imunologia");
+INSERT INTO professionals (cpf, qualifications, knowledge_area, expertise)
+VALUES ("5", "/curriculum", "Ciências Humanas", "Sociologia");
 
 INSERT INTO appointments(cpf_cliente, cpf_professional, data_consulta, hora_consulta) 
-VALUES('19', '29','2020-11-10', 11);
-
+VALUES('2', '3','2022-11-10', 11);
