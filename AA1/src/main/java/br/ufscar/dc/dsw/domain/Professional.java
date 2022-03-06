@@ -7,21 +7,21 @@ public class Professional {
     private String password;
     private String role;
     private String qualifications;
-    private String knowledgeArea;
+    private String knowledge_area;
     private String expertise;
 
     public Professional(String cpf) {
         this.setCpf(cpf);
     }
 
-    public Professional(String cpf, String name, String email, String password, String role, String qualifications, String knowledgeArea, String expertise) {
+    public Professional(String cpf, String name, String email, String password, String role, String qualifications, String knowledge_area, String expertise) {
         this.setCpf(cpf);
         this.setName(name);
         this.setEmail(email);
         this.setPassword(password);
         this.setRole(role);
         this.setQualifications(qualifications);
-        this.setKnowledgeArea(knowledgeArea);
+        this.setKnowledgeArea(knowledge_area);
         this.setExpertise(expertise);
     }
 
@@ -73,12 +73,12 @@ public class Professional {
     	return this.qualifications;
     }
     
-    public void setKnowledgeArea(String knowledgeArea) {
-    	this.knowledgeArea = knowledgeArea;
+    public void setKnowledgeArea(String knowledge_area) {
+    	this.knowledge_area = knowledge_area;
     }
     
     public String getKnowledgeArea() {
-    	return this.knowledgeArea;
+    	return this.knowledge_area;
     }
     
     public void setExpertise(String expertise) {

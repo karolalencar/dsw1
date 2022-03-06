@@ -2,14 +2,10 @@ package br.ufscar.dc.dsw.controller;
 
 import br.ufscar.dc.dsw.dao.ProfessionalDAO;
 import br.ufscar.dc.dsw.domain.Professional;
-import br.ufscar.dc.dsw.dao.ClientDAO;
 import br.ufscar.dc.dsw.domain.Client;
 import br.ufscar.dc.dsw.util.Error;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -166,31 +162,35 @@ public class ProfessionalController  extends HttpServlet{
     }
 
     private void insere(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        String cpf = request.getParameter("cpf");
-        String name = request.getParameter("name");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String role = request.getParameter("role");
-        String qualifications = request.getParameter("qualifications");
-        String knowledge_area = request.getParameter("knowledge_area");
-        String expertise = request.getParameter("expertise");
-        if (role == null || role.equals("")) {
-            role = "PROF";
-        }
+    	if (request.getParameter("enviar") != null) {
+    		try {
+    			request.setCharacterEncoding("UTF-8");
+    	        String cpf = request.getParameter("cpf");
+    	        String name = request.getParameter("name");
+    	        String email = request.getParameter("email");
+    	        String password = request.getParameter("password");
+    	        String role = request.getParameter("role");
+    	        String qualifications = request.getParameter("qualification");
+    	        String knowledge_area = request.getParameter("knowledge_area");
+    	        String expertise = request.getParameter("expertise");
+    	        if (role == null || role.equals("")) {
+    	            role = "PROF";
+    	        }
+            	
+                Professional professional = new Professional(cpf, name, email, password, role, qualifications, knowledge_area, expertise);
+                dao.insert(professional);
+            } catch (Exception e) {
+                Error erros = new Error();
+                erros.add("Erro nos dados preenchidos.");
 
-        try {
-            Professional professional = new Professional(cpf, name, email, password, role, qualifications, knowledge_area, expertise);
-            dao.insert(professional);
-        } catch (Exception e) {
-            Error erros = new Error();
-            erros.add("Erro nos dados preenchidos.");
+                request.setAttribute("mensagens", erros);
 
-            request.setAttribute("mensagens", erros);
+                RequestDispatcher rd = request.getRequestDispatcher("/profissional/formCadastro.jsp");
+                rd.forward(request, response);
+            }
+    	}
 
-            RequestDispatcher rd = request.getRequestDispatcher("/profissional/formCadastro.jsp");
-            rd.forward(request, response);
-        }
+        
         Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
 
         if(clienteLogado != null){

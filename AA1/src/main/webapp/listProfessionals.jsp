@@ -45,7 +45,8 @@
 					}
 				}
 			</script>
-		</head>
+	</head>
+	
 		<body>
 			<%
 				String contextPath = request.getContextPath().replace("/", "");

@@ -43,17 +43,17 @@
 						<legend>
 							<fmt:message key="professional_registration"/>
 						</legend>
-						<fmt:message key="cpf"/> </br>
+						<fmt:message key="cpf"/> 
 						<input type="text" name="cpf"/> <br/>
-						<fmt:message key="name"/> </br>
+						<fmt:message key="name"/> 
 						<input type="text" name="name"/> <br/>
-						<fmt:message key="email"/> </br>
+						<fmt:message key="email"/> 
 						<input type="email" name="email"/> <br/>
-						<fmt:message key="password"/> </br>
+						<fmt:message key="password"/> 
 						<input type="password" name="password"/> <br/>
-						<fmt:message key="expertise"/> </br>
+						<fmt:message key="expertise"/> 
 						<input type="text" name="expertise"/> <br/>
-						<fmt:message key="knowledge_area"/> </br>
+						<fmt:message key="knowledge_area"/> 
 						<select name="knowledge_area" id="knowledge_area">
 							<option value="Ciências Exatas e da Terra">Ciências Exatas e da Terra</option>
 							<option value="Ciências Biológicas">Ciências Biológicas</option>
@@ -71,8 +71,10 @@
 								<option value="ADMIN">ADMIN</option>
 							</select> <br/>
 						</c:if>
-						<fmt:message key="qualification"/> </br>
-						<div>
+						<label><fmt:message key="qualification" /> </label>
+						<input type="text" name="qualification" /> <br>
+						
+						<!--  <div>
 							<form action="pdf/insercao" enctype="multipart/form-data" method="post">
 							<br/>
 								Digite o nome do PDF:
@@ -82,6 +84,7 @@
 								<input type="submit" name="enviar" value="Enviar" />
 							</form>	
 						</div>
+						-->
 						<input type="submit" name="enviar" value="<fmt:message key="register"/>" />
 					</fieldset>
 				</form>
