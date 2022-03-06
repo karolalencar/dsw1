@@ -37,6 +37,7 @@
 					<c:when test="${sessionScope.clienteLogado != null && sessionScope.professionalLogged == null}">
                     	<div class="menu">
 	                    	<br>
+							
 	                    	<a class="btn-login" href="profissionais/lista">
 	                    		<fmt:message key="professional_list" />
 	                    	</a>

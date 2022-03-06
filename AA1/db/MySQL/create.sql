@@ -54,7 +54,7 @@ INSERT INTO users(cpf, name, email, password, role)
 VALUES ("13", "vini", "prof@gmail.com", "oi", "PROF");
 
 INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
-VALUES ("13", "/curriculum", "Medicina", "Imunologia");
+VALUES ("13", "/curriculum", "Ciências da Saúde", "Imunologia");
 
 INSERT INTO clients(cpf, telephone, gender, birth_date) 
 VALUES ("190", "98846-9932", "Masculino", "2020-10-10");
@@ -69,7 +69,7 @@ INSERT INTO users(cpf, name, email, password, role)
 VALUES ("29", "Kico", "k@gmail.com", "abc", "PROF");
 
 INSERT INTO professionals(cpf, qualifications, knowledge_area, expertise)
-VALUES ("29", "/curriculum", "Medicina", "Imunologia");
+VALUES ("29", "/curriculum", "Ciências da Saúde", "Imunologia");
 
 INSERT INTO appointments(cpf_cliente, cpf_professional, data_consulta, hora_consulta) 
 VALUES('19', '29','2020-11-10', 11);
