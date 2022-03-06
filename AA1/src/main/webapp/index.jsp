@@ -46,6 +46,12 @@
 	                    		<fmt:message key="appointment_list" />
 	                    	</a>
 							<br>
+							<c:if test="${sessionScope.professionalLogged.role == 'ADMIN' || sessionScope.clienteLogado.role == 'ADMIN'}">
+								<a class="btn-login" href="clientes">
+									<fmt:message key="client_list"/> 
+								</a>
+								<br>
+							</c:if>
 							<a class="btn-login" href="${pageContext.request.contextPath}/logout.jsp">
 	                        	<fmt:message key="log_out"/> 
 	                        </a>
@@ -53,14 +59,20 @@
                   	</c:when>
 					<c:when test="${sessionScope.clienteLogado == null && sessionScope.professionalLogged != null}">
                     	<div class="menu">
-                    	<br>
-						<a class="btn-login" href="appointment/lista">
-                    		<fmt:message key="appointment_list" />
-                    	</a>
-						<br>
-						<a class="btn-login" href="${pageContext.request.contextPath}/logout.jsp">
-                        	<fmt:message key="log_out"/> 
-                        </a>
+	                    	<br>
+							<a class="btn-login" href="appointment/lista">
+	                    		<fmt:message key="appointment_list" />
+	                    	</a>
+							<br>
+							<c:if test="${sessionScope.professionalLogged.role == 'ADMIN' || sessionScope.clienteLogado.role == 'ADMIN'}">
+								<a class="btn-login" href="clientes">
+									<fmt:message key="client_list"/> 
+								</a>
+								<br>
+							</c:if>
+							<a class="btn-login" href="${pageContext.request.contextPath}/logout.jsp">
+	                        	<fmt:message key="log_out"/> 
+	                        </a>
                     	</div>
                   	</c:when>
 				</c:choose>
@@ -72,15 +84,6 @@
 					<div class="hello">
 						<fmt:message key="index_hello_logged"/> ${sessionScope.professionalLogged.name}.
 					</div>
-				</c:if>
-				<c:if test="${sessionScope.professionalLogged.role == 'ADMIN' || sessionScope.clienteLogado.role == 'ADMIN'}">
-					<a class="btn-login" href="clientes">
-						<fmt:message key="client_list"/> 
-					</a>
-					<a  href="profissionais">
-						<fmt:message key="professionals_list" />
-					</a>
-					<br>
 				</c:if>
 				</div>
 				<br>
