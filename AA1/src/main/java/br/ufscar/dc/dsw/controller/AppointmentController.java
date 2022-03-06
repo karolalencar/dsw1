@@ -3,10 +3,13 @@ package br.ufscar.dc.dsw.controller;
 import br.ufscar.dc.dsw.dao.AppointmentDAO;
 import br.ufscar.dc.dsw.domain.Appointment;
 import br.ufscar.dc.dsw.domain.Client;
+import br.ufscar.dc.dsw.dao.ClientDAO;
 import br.ufscar.dc.dsw.domain.Professional;
+import br.ufscar.dc.dsw.dao.ProfessionalDAO;
 import br.ufscar.dc.dsw.util.Error;
 import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 import java.time.LocalDate;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.activation.*;
 
 @WebServlet(urlPatterns = "/appointment/*")
 public class AppointmentController  extends HttpServlet{
@@ -48,7 +54,7 @@ public class AppointmentController  extends HttpServlet{
                     lista(request, response);
                     break;
             }
-        } catch (RuntimeException | IOException | ServletException e) {
+        } catch (RuntimeException | IOException | MessagingException |ServletException e) {
             throw new ServletException(e);
         }
     }
@@ -84,7 +90,7 @@ public class AppointmentController  extends HttpServlet{
     }
 
     private void insere(HttpServletRequest request, HttpServletResponse response) 
-    		throws ServletException, IOException {
+    		throws ServletException, IOException, MessagingException {
     	Error erros = new Error();
     	Client clienteLogado = (Client) request.getSession().getAttribute("clienteLogado");
         Professional professionalLogged = (Professional) request.getSession().getAttribute("professionalLogged");
@@ -141,6 +147,8 @@ public class AppointmentController  extends HttpServlet{
             	if (!existe) {
                     dao.insert(appointment);
                     String URL = "/appointment"; 
+                    sendEmailClient(request, response, appointment);
+                    sendEmailProf(request, response, appointment);
                     RequestDispatcher rd = request.getRequestDispatcher(URL);
                     rd.forward(request, response);
             	} else {
@@ -157,6 +165,76 @@ public class AppointmentController  extends HttpServlet{
         
         response.sendRedirect("/AA1/cliente/listProfessionals.jsp");
         return;
+    }
+
+    private void sendEmailClient(HttpServletRequest request, HttpServletResponse response, Appointment appointment) throws ServletException, IOException, MessagingException {
+    	ProfessionalDAO daoProfessional = new ProfessionalDAO();
+        Professional professional = daoProfessional.get(appointment.getCpfProfissional());
+        ClientDAO daoClient = new ClientDAO();
+        Client client = daoClient.get(appointment.getCpfCliente());
+
+        Properties props = new Properties();
+        
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.auth", "true");
+        
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("consultaprofissionais1@gmail.com", "dbcae15342");
+            }
+        });
+        
+        MimeMessage message = new MimeMessage(session);
+        String emailCliente = client.getEmail();
+        String htmlMessage = "<h2>Consulta</h2><p>Olá "+ client.getName()+", sua consulta com "+ professional.getName()+"foi marcada para o dia "+appointment.getDataConsulta()+" às "+appointment.getHoraConsulta()+"h. O link da vídeo conferência é + "+request.getParameter("videoConf")+"</p>";
+        message.setContent( htmlMessage, "text/html; charset=utf-8");
+        message.setFrom(new InternetAddress("consultaprofissionais1@gmail.com"));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailCliente));
+        message.setSubject("Consulta Marcada");
+
+        Transport.send(message);
+
+    }
+
+    private void sendEmailProf(HttpServletRequest request, HttpServletResponse response, Appointment appointment) throws ServletException, IOException, MessagingException {
+    	ProfessionalDAO daoProfessional = new ProfessionalDAO();
+        Professional professional = daoProfessional.get(appointment.getCpfProfissional());
+        ClientDAO daoClient = new ClientDAO();
+        Client client = daoClient.get(appointment.getCpfCliente());
+
+        Properties props = new Properties();
+        
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.put("mail.smtp.port", "465");
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        props.setProperty("mail.smtp.ssl.protocols", "TLSv1.2");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.auth", "true");
+        
+
+        Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("consultaprofissionais1@gmail.com", "dbcae15342");
+            }
+        });
+
+        MimeMessage message = new MimeMessage(session);
+        String emailProfessional = professional.getEmail();
+        String htmlMessage = "<h2>Consulta</h2><p>Olá "+professional.getName()+", uma consulta com o paciente "+client.getName()+ " foi marcada para o dia "+appointment.getDataConsulta()+" às "+appointment.getHoraConsulta()+"h. O link da vídeo conferência é + "+request.getParameter("videoConf")+"</p>";
+        message.setContent(htmlMessage, "text/html; charset=utf-8");
+        message.setFrom(new InternetAddress("consultaprofissionais1@gmail.com"));
+        message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailProfessional));
+        message.setSubject("Consulta Marcada");
+
+        Transport.send(message);
+
     }
    
 }

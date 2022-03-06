@@ -11,8 +11,12 @@
 			<fmt:message key="professional_managing"/>
 		</title>
 		<link href="styles.css" rel="stylesheet" type="text/css"/>
-		<script src="js/ajaxExpertise.js"></script> <!-- <- Não está funcionando, não sei pq-->
-		<script>
+	</head>
+			
+		<div align="center">
+			</title>
+			<script src="js/ajaxExpertise.js"></script> <!-- <- Não está funcionando, não sei pq-->
+			<script>
 				var xmlHttp;
 
 
