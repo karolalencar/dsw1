@@ -154,7 +154,7 @@ public class AppointmentController  extends HttpServlet{
             	} else {
                     erros.add("O horário escolhido já está ocupado por você ou pelo profissional.");
                     request.setAttribute("mensagens", erros);
-                    String URL = "/appointment";
+                    String URL ="/cliente/formConsulta.jsp?cpfProf=" + cpfProfessional;
                     RequestDispatcher rd = request.getRequestDispatcher(URL);
                     rd.forward(request, response);
                     return;

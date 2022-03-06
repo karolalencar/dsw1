@@ -16,6 +16,15 @@
 			<%
 				String contextPath = request.getContextPath().replace("/", "");
 			%>
+			<c:if test="${mensagens.existeErros}">
+	            <div id="erro">
+	                <ul>
+	                    <c:forEach var="erro" items="${mensagens.erros}">
+	                        <li> ${erro} </li>
+	                    </c:forEach>
+	                </ul>
+	            </div>
+	        </c:if>
 			<div class="cadastro-consulta-container">
 				<form method="post" action="/<%= contextPath%>/appointment/insercao">
 					<div class="form-container consulta">
