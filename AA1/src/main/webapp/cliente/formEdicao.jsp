@@ -9,16 +9,17 @@
 			<title>
 				<fmt:message key="client_managing"/>
 			</title>
+			<link href="${pageContext.request.contextPath}/styles.css" rel="stylesheet" type="text/css"/>
 		</head>
 		<body>
 			<%
 				String contextPath = request.getContextPath().replace("/", "");
 			%>
 			<c:if test="${mensagens.existeErros}">
-            <div id="erro">
-                <ul>
+            <div class="erro" id="erro">
+                <ul class="erro-container">
                     <c:forEach var="erro" items="${mensagens.erros}">
-                        <li> ${erro} </li>
+                        <li class="erro-item"> ${erro} </li>
                     </c:forEach>
                 </ul>
             </div>

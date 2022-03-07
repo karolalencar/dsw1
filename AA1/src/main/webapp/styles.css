@@ -122,4 +122,35 @@ img {
 	font-family: sans-serif;
 	margin: 20px;
 }
-	        	
+	
+.erro {
+	width: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	top: 660px;
+	left: 720px;
+}
+	
+.erro-container {
+	display: flex;
+	flex-direction: column;
+	background-color: #FFE4C4; 
+	list-style-type: none;
+	border-radius: 8px;
+	padding: 8px;
+}  
+
+.erro-item {
+	color: red;
+	font-family: sans-serif;
+}   
+
+.sem-autorizacao {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	height: 100vh;
+}   	

@@ -7,13 +7,14 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Autorização de Usuário</title>
+        <link href="styles.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
               
         <%
                 String contextPath = request.getContextPath().replace("/", "");
 	%>
-        <div align="center">
+        <div class="sem-autorizacao" align="center">
         
                 <h2>
                         <a href="/<%=contextPath%>">
@@ -25,11 +26,11 @@
         <h1>Autorização de Usuário</h1>
         
         <c:if test="${mensagens.existeErros}">
-            <div id="erro">
-                <ul>
+            <div class="erro" id="erro">
+                <ul class="erro-container">
                     <c:forEach var="erro" items="${mensagens.erros}">
-                        <li> ${erro} </li>
-                        </c:forEach>
+                        <li class="erro-item"> ${erro} </li>
+                    </c:forEach>
                 </ul>
             </div>
         </c:if>
