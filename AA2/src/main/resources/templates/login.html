@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>Login</title>
+	</head>
+	
+	<body>
+		<fieldset id="login">
+			<form th:action="@{/login}" method="post">
+				<div>
+					<div>
+						<label for="username" th:text="#{user.label}"></label><br><input
+								type="text" id="username" name="username" class=""
+								autofocus="autofocus"><br>
+						<label for="senha" th:text="#{senha.label}"></label><br><input
+								type="password" id="password" name="password"
+								class=""><br>
+					</div>
+					<div class="">
+						<div class="">
+							<input type="submit" name="login-submit" id="login-submit"
+									class="">
+							
+						</div>
+					</div>
+				</div>
+			</form>
+		</fieldset>
+	</body>
+
+</html>
