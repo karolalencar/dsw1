@@ -24,7 +24,7 @@ public class Professional extends User {
 
     @NotBlank
 	@Column(nullable = false, length = 50)
-	private String knowledge_area;
+	private String knowledgeArea;
 
     @NotBlank
 	@Column(nullable = false, length = 50)
@@ -50,11 +50,11 @@ public class Professional extends User {
 	}
 
 	public String getKnowledge_area() {
-		return knowledge_area;
+		return knowledgeArea;
 	}
 
 	public void setKnowledge_area(String knowledge_area) {
-		this.knowledge_area = knowledge_area;
+		this.knowledgeArea = knowledge_area;
 	}
 
 	public String getExpertise() {
