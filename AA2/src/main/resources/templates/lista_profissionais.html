@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+	<head>
+		<title th:text="#{professionals_text}"></title>
+        <style>
+            table, th, td {
+               border: 1px solid black;
+            }
+         </style>
+	</head>
+	
+	<body>
+		<h1 th:text="#{professionals_text}"></h1>
+		<h2 th:text="#{home}"></h2>
+
+        <table class="">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th th:text="#{professional.cpf.label}"></th>
+                    <th th:text="#{professional.email.label}"></th>
+                    <th th:text="#{professional.name.label}"></th>
+                    <th th:text="#{professional.password.label}"></th>
+                    <th th:text="#{professional.role.label}"></th>
+                    <th th:text="#{professional.expertise.label}"></th>
+                    <th th:text="#{professional.knowledgeArea.label}"></th>
+                    <th th:text="#{professional.qualifications.label}"></th>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <th th:text="#{action.label}"></th>
+                    </div>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="profissional : ${profissionais}">
+                    <td th:text="${profissional.id}"></td>
+                    <td th:text="${profissional.cpf}"></td>
+                    <td th:text="${profissional.email}"></td>
+                    <td th:text="${profissional.name}"></td>
+                    <td th:text="${profissional.password}"></td>
+                    <td th:text="${profissional.role}"></td>
+                    <td th:text="${profissional.expertise}"></td>
+                    <td th:text="${profissional.knowledgeArea}"></td>
+                    <td th:text="${profissional.qualifications}"></td>
+                    <div sec:authorize="hasAuthority('ADMIN')">
+                        <td>
+                            <a class="" th:text="#{edit_text}" th:href="@{/professionals/editar/{id} (id=${profissional.id}) }">             
+                        </a>
+                        <a class="" th:text="#{remove_text}" th:href="@{/professionals/excluir/{id} (id=${profissional.id}) }">             
+                        </a>
+                        
+                        </td>
+                    </div>
+                </tr>
+            </tbody>
+        </table>
+        
+	
+	</body>
+</html>

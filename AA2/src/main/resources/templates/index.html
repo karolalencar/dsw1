@@ -5,19 +5,50 @@
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 
 	<head>
-		<title></title>
-		<link th:href="" rel="stylesheet" />
+		<title>Home</title>
 	</head>
 	
 	<body>
-		<h1 th:text="#{}"></h1>
-		<h2 th:text="#{}"></h2>
-		<a th:href="@{}">
-			<span class="" th:text="#{}"></span>
-		</a>
-		<a th:href="@{}">
-			<span class="" th:text="#{}"></span>
-		</a>
+		<h1 th:text="#{home}"></h1>
+		<h2 th:text="#{home}"></h2>
+
+		<div sec:authorize="isAuthenticated()">
+			<h1>
+				<span th:text="#{index.hello}"></span>
+				<span th:inline="text">[[${#httpServletRequest.remoteUser}]]!</span>
+			</h1>
+		</div>
+
+		<div sec:authorize="hasAuthority('ADMIN')">
+			<a th:href="@{/professionals/listar}">
+				<span class="" th:text="#{professionals_text}"></span>
+			</a>
+		</div>
+
+		<div sec:authorize="hasAuthority('CLIENT')">
+			<a th:href="@{/professionals/listar}">
+				<span class="" th:text="#{professionals_text}"></span>
+			</a>
+		</div>
+		<div sec:authorize="!isAuthenticated()">
+			<a th:href="@{/professionals/listar}">
+				<span class="" th:text="#{professionals_text}"></span>
+			</a>
+			<a th:href="@{/login}">
+				<span class="" th:text="#{logon_text}"></span>
+			</a>
+		</div>
+
+		<div sec:authorize="isAuthenticated()" style="right: 10px; position: absolute">
+            <form th:action="@{/logout}" method="post">
+                <div class="row">
+                    <div class="col-sm-12 col-sm-offset-3">
+                        <input type="submit" name="login-submit" id="login-submit"
+                            class="form-control btn btn-info" value="Logout">
+                    </div>
+                </div>
+            </form>
+        </div>
 	
 	</body>
 </html>

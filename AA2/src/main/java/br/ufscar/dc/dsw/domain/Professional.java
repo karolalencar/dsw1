@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class Professional extends User {
     
 	@NotBlank
-	@Size(min = 14, max = 14)
+	@Size(min = 11, max = 14)
 	@Column(nullable = false, unique = true, length = 60)
 	private String cpf;
 	
@@ -41,20 +41,20 @@ public class Professional extends User {
 		this.cpf = Cpf;
 	}
 
-	public String getQualification() {
+	public String getQualifications() {
 		return qualifications;
 	}
 
-	public void setQualification(String qualifications) {
+	public void setQualifications(String qualifications) {
 		this.qualifications = qualifications;
 	}
 
-	public String getKnowledge_area() {
+	public String getKnowledgeArea() {
 		return knowledgeArea;
 	}
 
-	public void setKnowledge_area(String knowledge_area) {
-		this.knowledgeArea = knowledge_area;
+	public void setKnowledgeArea(String knowledgeArea) {
+		this.knowledgeArea = knowledgeArea;
 	}
 
 	public String getExpertise() {

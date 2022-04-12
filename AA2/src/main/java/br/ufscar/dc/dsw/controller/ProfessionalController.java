@@ -40,11 +40,11 @@ public class ProfessionalController {
 	}
 
     @GetMapping("/listar")
-	public String listar(@RequestParam(required = false) String expertise, @RequestParam(required = false) String knowledge_area, ModelMap model) {
+	public String listar(@RequestParam(required = false) String expertise, @RequestParam(required = false) String knowledgeArea, ModelMap model) {
 		List<Professional> professionals = professionalService.buscarTodos();
 		Set<String> expertiseHash = new HashSet<String>();
 
-        if (knowledge_area != null && !knowledge_area.isEmpty()) {
+        if (knowledgeArea != null && !knowledgeArea.isEmpty()) {
 			professionals = professionalService.buscarPorExpertise(expertise);
             for (Professional professional : professionals) {
                 String cidade = professional.getExpertise();
@@ -57,7 +57,7 @@ public class ProfessionalController {
 		if (expertise != null && !expertise.isEmpty()) {
 			professionals = professionalService.buscarPorExpertise(expertise);
 		}
-
+		
 		model.addAttribute("profissionais", professionals);
 		model.addAttribute("expertises", expertiseHash);
 		return "lista_profissionais";
@@ -106,7 +106,7 @@ public class ProfessionalController {
 		userService.excluir(id);
 		attr.addFlashAttribute("sucess", "Profissional excluído com sucesso.");
 		
-		return "redirect:/profissional/lista";
+		return "redirect:/professionals/listar";
 	}
 
 }

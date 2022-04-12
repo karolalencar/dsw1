@@ -15,6 +15,9 @@ import javax.persistence.Table;
 @Table(name = "User")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User extends AbstractEntity<Long> {
+
+	@Column(nullable = false, length = 45)
+    private String username;
  
     @Column(nullable = false, length = 45)
     private String name;
@@ -25,12 +28,23 @@ public class User extends AbstractEntity<Long> {
     @Column(nullable = false, unique = true, length = 11)
     private String cpf;
     
-    @Column(nullable = false, length = 64)
+    @Column(nullable = false, length = 240)
     private String password;
     
     @Column(nullable = false, length = 45)
     private String role;
+
+	@Column(nullable = false)
+    private boolean enabled;
 	
+	public String getUsername() {
+		return username;
+	}
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -69,6 +83,14 @@ public class User extends AbstractEntity<Long> {
 	
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+	
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 	
 
