@@ -16,5 +16,5 @@ public interface ProfessionalDAO extends CrudRepository<Professional, String> {
 
 	List<Professional> findByExpertise(String expertise);
 
-    List<Professional> findByKnowledgeArea(String knowledge_area);
+    List<Professional> findByKnowledgeArea(String knowledgeArea);
 }

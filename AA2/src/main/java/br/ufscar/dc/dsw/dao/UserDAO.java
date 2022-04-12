@@ -11,15 +11,12 @@ import org.springframework.data.repository.query.Param;
 @SuppressWarnings("unchecked")
 public interface UserDAO extends CrudRepository<User, String> {
 
-	/*@Query("SELECT u FROM User u WHERE u.email = :email")
-    public User getUserByEmail(@Param("email") String email);*/
-
 	@Query("SELECT u FROM User u WHERE u.username = :username")
     public User getUserByUsername(@Param("username") String username);
 
     User findById(long id);
 
-	User findByCpf(String cpf);
+	User findByUsername(String username);
 
 	List<User> findAll();
 	

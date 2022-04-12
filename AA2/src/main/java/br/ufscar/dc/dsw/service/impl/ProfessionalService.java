@@ -38,8 +38,8 @@ public class ProfessionalService implements IProfessionalService{
 	}
 
     @Transactional(readOnly = true)
-	public List<Professional> buscarPorKnowledge_area(String knowledge_area) {
-		return dao.findByKnowledgeArea(knowledge_area);
+	public List<Professional> buscarPorKnowledgeArea(String knowledgeArea) {
+		return dao.findByKnowledgeArea(knowledgeArea);
 	}
 	
 }

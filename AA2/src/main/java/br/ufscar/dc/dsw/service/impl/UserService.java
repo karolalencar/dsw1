@@ -36,7 +36,8 @@ public class UserService implements IUserService {
 	}
 
 	@Transactional(readOnly = true)
-	public User buscarPorCpf(String cpf) {
-		return dao.findByCpf(cpf);
+	public User buscarPorUsername(String username) {
+		return dao.findByUsername(username);
 	}
+
 }

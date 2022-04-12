@@ -1,11 +1,62 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
 <head>
-<meta charset="UTF-8" />
+    <title th:text="#{cadastro.prof.text}"></title>
 </head>
+
 <body>
+    <h1 th:text="#{cadastro.prof.text}"></h1>
 
-    
+    <form th:action="@{/professionals/salvar}"  th:object="${professional}" method="POST">
+        <fieldset style="width: 25%;">
+            <label th:text="#{nome.text}"></label>:
+            <input class="input" type="text" name="nome" th:placeholder="#{nome.text}" th:field="*{name}"
+            th:classappend="${#fields.hasErrors('name')} ? is-invalid" />
+            <br><br>
+            <label th:text="#{user.label}"></label>:
+            <input class="input" type="text" name="username" th:placeholder="#{user.label}" th:field="*{username}"
+            th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{cpf.text}"></label>:
+            <input class="input" type="text" name="cpf" th:placeholder="#{cpf.text}" th:field="*{cpf}"
+            th:classappend="${#fields.hasErrors('cpf')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{email.text}"></label>:
+            <input class="input" type="text" name="email" th:placeholder="#{email.text}" th:field="*{email}"
+            th:classappend="${#fields.hasErrors('email')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{senha.label}"></label>:
+            <input class="input" type="password" name="senha" th:placeholder="#{senha.label}" th:field="*{password}"
+            th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{professional.knowledgeArea.label}"></label>:
+            <select name="knowledgeArea" id="knowledgeArea" th:field="*{knowledgeArea}" th:classappend="${#fields.hasErrors('knowledgeArea')} ? is-invalid">
+                <option value="Ciências Exatas e da Terra">Ciências Exatas e da Terra</option>
+                <option value="Ciências Biológicas">Ciências Biológicas</option>
+                <option value="Engenharias">Engenharias</option>
+                <option value="Ciências da Saúde">Ciências da Saúde</option>
+                <option value="Ciências Agrárias">Ciências Agrárias</option>
+                <option value="Linguística, Letras e Artes">Linguística, Letras e Artes</option>
+                <option value="Ciências Sociais Aplicadas">Ciências Sociais Aplicadas</option>
+                <option value="Ciências Humanas">Ciências Humanas</option>
+            </select>
+            <br><br>
+            <label th:text="#{professional.expertise.label}"></label>:
+            <input class="input" type="text" name="expertise" th:placeholder="#{professional.expertise.label}" th:field="*{expertise}"
+            th:classappend="${#fields.hasErrors('expertise')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{professional.qualifications.label}"></label>:
+            <input class="input" type="text" name="qualifications" th:placeholder="#{professional.qualifications.label}" th:field="*{qualifications}"
+            th:classappend="${#fields.hasErrors('qualifications')} ? is-invalid"/>
+            <br><br>
+
+            <input type="submit" class="submit" th:value="#{submit.text}"/> 
+        </fieldset>
+    </form>
 </body>
-</html>
 
+</html>

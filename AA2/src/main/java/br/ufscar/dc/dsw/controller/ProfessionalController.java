@@ -45,11 +45,11 @@ public class ProfessionalController {
 		Set<String> expertiseHash = new HashSet<String>();
 
         if (knowledgeArea != null && !knowledgeArea.isEmpty()) {
-			professionals = professionalService.buscarPorExpertise(expertise);
+			professionals = professionalService.buscarPorKnowledgeArea(knowledgeArea);
             for (Professional professional : professionals) {
-                String cidade = professional.getExpertise();
-                if (!expertiseHash.contains(cidade)) {
-                    expertiseHash.add(cidade);
+                String expertiseAux = professional.getExpertise();
+                if (!expertiseHash.contains(expertiseAux)) {
+                    expertiseHash.add(expertiseAux);
                 }
             }
 		}
@@ -68,15 +68,15 @@ public class ProfessionalController {
 		if (professional.getRole() == null) {
 			professional.setRole("PROF");
 		}
-		
+		System.out.print(professional);
 		if (result.hasErrors()) {
-			return "profissionais/cadastro";
+			return "profissional/cadastro";
 		}
 
 		professional.setPassword(encoder.encode(professional.getPassword()));
 		userService.salvar(professional);
 		attr.addFlashAttribute("sucess", "Profissional inserido com sucesso");
-		return "redirect:/profissional/listar";
+		return "/login";
 	}
 
     @GetMapping("/editar/{id}") // Recupera o profissional e os atributos dele. Usado pelo admin
@@ -86,18 +86,19 @@ public class ProfessionalController {
 	}
 
     @PostMapping("/editar") // Edita um profissional. Usado pelo admin
-	public String editar(@Valid Professional professional, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Professional professional, BindingResult result, RedirectAttributes attr,BCryptPasswordEncoder encoder) {
 		if (professional.getRole() == null) {
 			professional.setRole("PROF");
 		}
 
 		if (result.hasErrors()) {
-			return "profissional/cadastro";
+			return "profissional/edicao";
 		}
 
+		professional.setPassword(encoder.encode(professional.getPassword()));
 		userService.salvar(professional);
 		attr.addFlashAttribute("sucess", "Profissional editado com sucesso.");
-		return "redirect:/profissional/lista";
+		return "redirect:/professionals/listar";
 	}
 
     @GetMapping("/excluir/{id}")

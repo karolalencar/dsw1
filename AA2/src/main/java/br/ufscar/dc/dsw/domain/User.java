@@ -22,12 +22,6 @@ public class User extends AbstractEntity<Long> {
     @Column(nullable = false, length = 45)
     private String name;
 
-    @Column(nullable = false, unique = true, length = 50)
-    private String email;
-
-    @Column(nullable = false, unique = true, length = 11)
-    private String cpf;
-    
     @Column(nullable = false, length = 240)
     private String password;
     
@@ -53,21 +47,7 @@ public class User extends AbstractEntity<Long> {
 		this.name = name;
 	}
 
-    public String getEmail() {
-		return email;
-	}
-	
-	public void setEmail(String email) {
-		this.email = email;
-	}
 
-    public String getCpf() {
-		return cpf;
-	}
-	
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
 	
 	public String getPassword() {
 		return password;

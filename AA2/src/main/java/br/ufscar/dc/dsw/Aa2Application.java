@@ -24,8 +24,6 @@ public class Aa2Application {
 			User user = new User();
 			user.setUsername("admin");
 			user.setName("admin");
-			user.setCpf("10929012911");
-			user.setEmail("admin@gmail.com");
 			user.setPassword(encoder.encode("admin"));
 			user.setRole("ADMIN");
 			user.setEnabled(true);

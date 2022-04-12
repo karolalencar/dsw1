@@ -14,6 +14,6 @@ public interface IProfessionalService {
 
 	List<Professional> buscarPorExpertise(String expertise);
 
-    List<Professional> buscarPorKnowledge_area(String knowledge_area);
+    List<Professional> buscarPorKnowledgeArea(String knowledgeArea);
 
 }

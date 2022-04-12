@@ -8,7 +8,7 @@ public interface IUserService {
 
     User buscarPorId(Long id);
 
-	User buscarPorCpf(String Cpf);
+	User buscarPorUsername(String username);
 
 	List<User> buscarTodos();
 
