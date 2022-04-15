@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+    <title th:text="#{client.update.text}"></title>
+</head>
+
+<body>
+    <h1 th:text="#{client.update.text}"></h1>
+
+    <form th:action="@{/clientes/editar}"  th:object="${client}" method="POST">
+        <fieldset style="width: 25%;">
+            <label th:text="#{nome.text}"></label>:
+            <input class="input" type="text" name="nome" th:placeholder="#{nome.text}" th:field="*{name}"
+            th:classappend="${#fields.hasErrors('name')} ? is-invalid" />
+            <br><br>
+            <label th:text="#{user.label}"></label>:
+            <input class="input" type="text" name="username" th:placeholder="#{user.label}" th:field="*{username}"
+            th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{cpf.text}"></label>:
+            <input class="input" type="text" name="cpf" th:placeholder="#{cpf.text}" th:field="*{cpf}" value="${professional.cpf}" readonly
+            th:classappend="${#fields.hasErrors('cpf')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{email.text}"></label>:
+            <input class="input" type="text" name="email" th:placeholder="#{email.text}" th:field="*{email}"
+            th:classappend="${#fields.hasErrors('email')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{senha.label}"></label>:
+            <input class="input" type="password" name="senha" th:placeholder="#{senha.label}" th:field="*{password}"
+            th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{telephone.label}"></label>:
+            <input class="input" type="text" name="telephone" th:placeholder="#{telephone.label}" th:field="*{telephone}"
+            th:classappend="${#fields.hasErrors('telephone')} ? is-invalid"/>
+            <br><br>
+	        <label th:text="#{gender.label}"></label>:
+            <input class="input" type="text" name="gender" th:placeholder="#{gender.label}" th:field="*{gender}"
+            th:classappend="${#fields.hasErrors('gender')} ? is-invalid"/>
+            <br><br>
+            <label th:text="#{birthdate.label}"></label>:
+            <input class="input" type="text" name="birthdate" th:placeholder="#{birthdate.label}" th:field="*{birthDate}"
+            th:classappend="${#fields.hasErrors('birthDate')} ? is-invalid"/>
+            <br><br>
+            <input type="hidden" id="id" th:field="*{id}" />
+            <input type="submit" class="submit" th:value="#{submit.text}"/> 
+        </fieldset>
+    </form>
+</body>
+
+</html>

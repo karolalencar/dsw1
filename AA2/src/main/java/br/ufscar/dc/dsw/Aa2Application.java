@@ -103,6 +103,32 @@ public class Aa2Application {
 			professional4.setQualifications("teste");
 			professional4.setEnabled(true);
 			usuarioDAO.save(professional4);
+			
+			Client client1 = new Client();
+			client1.setUsername("client1");
+			client1.setName("Kiko");
+			client1.setPassword(encoder.encode("abc"));
+			client1.setRole("CLIENT");
+			client1.setCpf("00000000000000");
+			client1.setEmail("client1@gmail.com");
+			client1.setTelephone("99999999999");
+			client1.setGender("M");
+			client1.setBirthDate("2010-03-10");
+			client1.setEnabled(true);
+			usuarioDAO.save(client1);
+			
+			Client client2 = new Client();
+			client2.setUsername("client2");
+			client2.setName("Cliente");
+			client2.setPassword(encoder.encode("abcd"));
+			client2.setRole("CLIENT");
+			client2.setCpf("00000000000001");
+			client2.setEmail("client2@gmail.com");
+			client2.setTelephone("99999999998");
+			client2.setGender("F");
+			client2.setBirthDate("2000-03-10");
+			client2.setEnabled(true);
+			usuarioDAO.save(client2);
 		};
 	}
 
