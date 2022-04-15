@@ -6,6 +6,15 @@
 
 	<head>
 		<title>Home</title>
+		<style>
+			.menu-unauthenticated {
+				display: flex;
+				gap: 8px;
+			}
+			.menu-unauthenticated a {
+				text-decoration: none;
+			}
+		</style>
 	</head>
 	
 	<body>
@@ -24,13 +33,19 @@
 				<span class="" th:text="#{professionals_text}"></span>
 			</a>
 		</div>
+		
+		<div sec:authorize="hasAuthority('ADMIN')">
+			<a th:href="@{/clientes/listar}">
+				<span class="" th:text="#{clients.text}"></span>
+			</a>
+		</div>
 
 		<div sec:authorize="hasAuthority('CLIENT')">
 			<a th:href="@{/professionals/listar}">
 				<span class="" th:text="#{professionals_text}"></span>
 			</a>
 		</div>
-		<div sec:authorize="!isAuthenticated()">
+		<div class="menu-unauthenticated" sec:authorize="!isAuthenticated()">
 			<a th:href="@{/professionals/listar}">
 				<span class="" th:text="#{professionals_text}"></span>
 			</a>
@@ -39,6 +54,9 @@
 			</a>
 			<a th:href="@{/professionals/cadastrar}">
 				<span class="" th:text="#{cadastro_prof_text}"></span>
+			</a>
+			<a th:href="@{/clientes/cadastrar}">
+				<span class="" th:text="#{client.register}"></span>
 			</a>
 		</div>
 
