@@ -63,8 +63,8 @@
                         <th th:text="#{professional.cpf.label}"></th>
                         <th th:text="#{professional.email.label}"></th>
                         <th th:text="#{professional.name.label}"></th>
-                        <th th:text="#{professional.password.label}"></th>
-                        <th th:text="#{professional.role.label}"></th>
+                        <!--<th th:text="#{professional.password.label}"></th>-->
+                        <!--<th th:text="#{professional.role.label}"></th>-->
                         <th th:text="#{professional.expertise.label}"></th>
                         <th th:text="#{professional.knowledgeArea.label}"></th>
                         <th th:text="#{professional.qualifications.label}"></th>
@@ -79,11 +79,11 @@
                         <td th:text="${profissional.cpf}"></td>
                         <td th:text="${profissional.email}"></td>
                         <td th:text="${profissional.name}"></td>
-                        <td th:text="${profissional.password}"></td>
-                        <td th:text="${profissional.role}"></td>
+                        <!--<td th:text="${profissional.password}"></td>-->
+                        <!--<td th:text="${profissional.role}"></td>-->
                         <td th:text="${profissional.expertise}"></td>
                         <td th:text="${profissional.knowledgeArea}"></td>
-                        <td th:text="${profissional.qualifications}"></td>
+                        <td style="text-align: center"><a th:href="@{/professionals/download/{id} (id=${profissional.id}) }" th:text="${profissional.filename}"></a></td>
                         <div sec:authorize="hasAuthority('ADMIN')">
                             <td>
                                 <a class="" th:text="#{edit_text}" th:href="@{/professionals/editar/{id} (id=${profissional.id}) }">             

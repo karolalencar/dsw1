@@ -8,6 +8,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import javax.persistence.Lob;
 
 @SuppressWarnings("serial")
 @Entity
@@ -25,7 +26,10 @@ public class Professional extends User {
 	
 	@NotBlank
 	@Column(nullable = false, length = 100)
-	private String qualifications;
+	private String filename;
+
+	@Lob
+	private byte[] qualifications;
 
     @NotBlank
 	@Column(nullable = false, length = 50)
@@ -34,6 +38,8 @@ public class Professional extends User {
     @NotBlank
 	@Column(nullable = false, length = 50)
 	private String expertise;
+
+	
 
 	@OneToMany(mappedBy = "professional")
 	private List<Appointment> appointments;
@@ -54,11 +60,11 @@ public class Professional extends User {
 		this.email = email;
 	}
 
-	public String getQualifications() {
+	public byte[] getQualifications() {
 		return qualifications;
 	}
 
-	public void setQualifications(String qualifications) {
+	public void setQualifications(byte[] qualifications) {
 		this.qualifications = qualifications;
 	}
 
@@ -76,5 +82,13 @@ public class Professional extends User {
 
 	public void setExpertise(String expertise) {
 		this.expertise = expertise;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 }
