@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+	
+	<head>
+		<title></title>
+	</head>
+	
+	<body>
+		<h1></h1>
+		
+		<div align="center">
+            <table class="">
+                <thead>
+                    <tr>
+                        <th th:text="#{date.label}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="consulta : ${consultas}">
+                        <td th:text="${consulta.id}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+	</body>
+	
+</html>
