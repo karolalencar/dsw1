@@ -9,39 +9,18 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import br.ufscar.dc.dsw.domain.*;
 import br.ufscar.dc.dsw.dao.*;
 
-/*import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.beans.factory.annotation.Autowired;*/
-
-
 @SpringBootApplication
 public class Aa2Application {
-
-	/*@Autowired
-    private JavaMailSender javaMailSender;*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(Aa2Application.class, args);
 	}
 
-	/*void sendEmail() {
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo("aquila@estudante.ufscar.br");
-
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        javaMailSender.send(msg);
-
-    }*/
-
 
 	@Bean
 	public CommandLineRunner demo(UserDAO usuarioDAO, ProfessionalDAO locadoraDAO, BCryptPasswordEncoder encoder) {
 		return (args) -> {
-			
-			//sendEmail();
+
 
 			User user = new User();
 			user.setUsername("admin");

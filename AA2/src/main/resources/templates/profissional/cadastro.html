@@ -50,7 +50,7 @@
             th:classappend="${#fields.hasErrors('expertise')} ? is-invalid"/>
             <br><br>
             <label th:text="#{professional.qualifications.label}"></label>:
-            <input class="input" type="file" name="file" th:placeholder="#{professional.qualifications.label}" />
+            <input class="input" type="file" name="file" accept="application/pdf" th:placeholder="#{professional.qualifications.label}" />
             <br><br>
 
             <input type="submit" class="submit" th:value="#{submit.text}"/> 

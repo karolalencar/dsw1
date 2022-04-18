@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Client;
 import br.ufscar.dc.dsw.domain.Professional;
 import br.ufscar.dc.dsw.domain.Appointment;
-import br.ufscar.dc.dsw.domain.User;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.impl.AppointmentService;
 import br.ufscar.dc.dsw.service.spec.IClientService;
@@ -26,7 +26,7 @@ import br.ufscar.dc.dsw.service.spec.IProfessionalService;
 import br.ufscar.dc.dsw.service.impl.ProfessionalService;
 import org.springframework.security.core.Authentication;
 import br.ufscar.dc.dsw.service.spec.IAppointmentService;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import br.ufscar.dc.dsw.service.spec.IUserService;
 
