@@ -51,7 +51,7 @@ public class Aa2Application {
 			user.setEnabled(true);
 			usuarioDAO.save(user);
 
-
+			byte[] ba2 = {1,2,3,4,5};
 			Professional professional1 = new Professional();
 			professional1.setUsername("professional1");
 			professional1.setName("Aquila Oliveira");
@@ -61,8 +61,9 @@ public class Aa2Application {
 			professional1.setEmail("aquila@estudante.ufscar.br");
 			professional1.setExpertise("Terapia Cognitiva");
 			professional1.setKnowledgeArea("Engenharias");
-			professional1.setQualifications("teste");
+			professional1.setQualifications(ba2);
 			professional1.setEnabled(true);
+			professional1.setFilename("teste");
 			usuarioDAO.save(professional1);
 
 			Professional professional2 = new Professional();
@@ -74,8 +75,9 @@ public class Aa2Application {
 			professional2.setEmail("profissional2@gmail.com");
 			professional2.setExpertise("Biologia e Espaço Tridimensional");
 			professional2.setKnowledgeArea("Ciências Biológicas");
-			professional2.setQualifications("teste");
+			//professional2.setQualifications("teste");
 			professional2.setEnabled(true);
+			professional2.setFilename("teste");
 			usuarioDAO.save(professional2);
 			
 			Professional professional3 = new Professional();
@@ -87,8 +89,9 @@ public class Aa2Application {
 			professional3.setEmail("profissional3@gmail.com");
 			professional3.setExpertise("Biologia Computacional");
 			professional3.setKnowledgeArea("Ciências Biológicas");
-			professional3.setQualifications("teste");
+			//professional3.setQualifications("teste");
 			professional3.setEnabled(true);
+			professional3.setFilename("teste");
 			usuarioDAO.save(professional3);
 
 			Professional professional4 = new Professional();
@@ -100,8 +103,9 @@ public class Aa2Application {
 			professional4.setEmail("profissional4@gmail.com");
 			professional4.setExpertise("Lingua Inglesa");
 			professional4.setKnowledgeArea("Linguística, Letras e Artes");
-			professional4.setQualifications("teste");
+			//professional4.setQualifications("teste");
 			professional4.setEnabled(true);
+			professional4.setFilename("teste");
 			usuarioDAO.save(professional4);
 			
 			Client client1 = new Client();

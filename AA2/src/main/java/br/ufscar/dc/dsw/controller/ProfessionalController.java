@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.util.StringUtils;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 import br.ufscar.dc.dsw.domain.Professional;
@@ -64,17 +69,23 @@ public class ProfessionalController {
 	}
 
     @PostMapping("/salvar")// Salva o profissional no banco em todas as devidas tabelas
-	public String salvar(@Valid Professional professional, BindingResult result, RedirectAttributes attr, BCryptPasswordEncoder encoder) {
+	public String salvar(@Valid Professional professional, BindingResult result, RedirectAttributes attr, BCryptPasswordEncoder encoder, @RequestParam("file") MultipartFile file) throws IOException {
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		professional.setQualifications(file.getBytes());
+		professional.setFilename(fileName);
+
 		if (professional.getRole() == null) {
 			professional.setRole("PROF");
 		}
-		System.out.print(professional);
-		if (result.hasErrors()) {
+
+		/*if (result.hasErrors()) {
+			System.out.print("cheguei aqui");
 			return "profissional/cadastro";
-		}
+		}*/
 
 		professional.setPassword(encoder.encode(professional.getPassword()));
 		userService.salvar(professional);
+
 		attr.addFlashAttribute("sucess", "Profissional inserido com sucesso");
 		return "/login";
 	}
@@ -108,6 +119,27 @@ public class ProfessionalController {
 		attr.addFlashAttribute("sucess", "Profissional excluído com sucesso.");
 		
 		return "redirect:/professionals/listar";
+	}
+
+	@GetMapping(value = "/download/{id}")
+	public void download(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") Long id) {
+		Professional professional= professionalService.buscarPorId(id);
+
+		// set content type
+		response.setContentType("application/pdf");
+		
+		// add response header (caso queira forçar o download)
+		//response.addHeader("Content-Disposition", "attachment; filename=" + professional.getName());
+		try {
+			// copies all bytes to an output stream
+			response.getOutputStream().write(professional.getQualifications());
+			
+			// flushes output stream
+			response.getOutputStream().flush();
+		} catch (IOException e) {
+			System.out.println("Error :- " + e.getMessage());
+			System.out.print("Error :- ");
+		}
 	}
 
 }

@@ -11,7 +11,7 @@
 <body>
     <h1 th:text="#{cadastro.prof.text}"></h1>
 
-    <form th:action="@{/professionals/salvar}"  th:object="${professional}" method="POST">
+    <form th:action="@{/professionals/salvar}"  th:object="${professional}" method="POST" enctype="multipart/form-data">
         <fieldset style="width: 25%;">
             <label th:text="#{nome.text}"></label>:
             <input class="input" type="text" name="nome" th:placeholder="#{nome.text}" th:field="*{name}"
@@ -50,8 +50,7 @@
             th:classappend="${#fields.hasErrors('expertise')} ? is-invalid"/>
             <br><br>
             <label th:text="#{professional.qualifications.label}"></label>:
-            <input class="input" type="text" name="qualifications" th:placeholder="#{professional.qualifications.label}" th:field="*{qualifications}"
-            th:classappend="${#fields.hasErrors('qualifications')} ? is-invalid"/>
+            <input class="input" type="file" name="file" th:placeholder="#{professional.qualifications.label}" />
             <br><br>
 
             <input type="submit" class="submit" th:value="#{submit.text}"/> 
