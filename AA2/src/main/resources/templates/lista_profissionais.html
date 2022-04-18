@@ -10,11 +10,27 @@
             table, th, td {
                border: 1px solid black;
             }
+            .home {
+				text-decoration: none;
+				font-size: 20px;
+				color: #000;
+				position: absolute;
+				top: 15px;
+				left: 15px;
+			}
+			.add-prof {
+				margin-bottom: 10px;
+			}
          </style>
 	</head>
 	
 	<body>
 		<h1 align="center" style="margin-bottom: 50px;" th:text="#{list_professionals_text}"></h1>
+		
+		<div align="center" class="add-prof" sec:authorize="hasAuthority('ADMIN')">
+        	<a th:text="#{prof.add}" th:href="@{/professionals/cadastrar}">             
+        	</a>
+        </div>
 
         <div align="center">
             <form name='form' action="/professionals/listar" method="get">
@@ -105,7 +121,7 @@
                 </tbody>
             </table>
         </div>
-        
+        <a class="home" th:href="@{/}"> &laquo; Home</a>
 	
 	</body>
 </html>

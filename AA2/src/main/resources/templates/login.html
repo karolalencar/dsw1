@@ -4,34 +4,76 @@
 	
 	<head>
 		<title>Login</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				box-sizing: border-box;
+			}
+			h1 {
+				text-align: center;
+				margin-bottom: 50px;
+			}
+			.btn {
+				text-align: center;
+				color: #000;
+				background-color: #DCDCDC;
+				border: 1px solid #DCDCDC;
+				padding: 10px 16px;
+				width: 150px;
+				border-radius: 10px;
+				font-size: 16px;
+				cursor: pointer;
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+  				align-items: center;
+  				justify-content: center;
+				gap: 8px;
+			}
+			.input {
+				margin: 8px 10px;
+				border: 1px solid #DCDCDC;
+				padding: 8px 16px;
+				width: 200px;
+				border-radius: 8px;
+			}
+			.margin {
+				margin-left: 10px;
+			}
+			.home {
+				text-decoration: none;
+				font-size: 20px;
+				color: #000;
+				position: absolute;
+				top: 15px;
+				left: 15px;
+			}
+		</style>
 	</head>
 	
 	<body>
-		<h1>Login
-		</h1>
-	
-		<fieldset id="login">
+		<h1>Login</h1>
+		
 			<form th:action="@{/login}" method="post">
-				<div>
-					<div>
-						<label for="username" th:text="#{user.label}"></label><br><input
-								type="text" id="username" name="username" class=""
+				<div class="container">
+					<div class="">
+						<label class="margin" for="username" th:text="#{user.label}"></label><br><input
+								type="text" id="username" name="username" class="input"
 								autofocus="autofocus"><br>
-						<label for="senha" th:text="#{senha.label}"></label><br><input
+						<label class="margin" for="senha" th:text="#{senha.label}"></label><br><input
 								type="password" id="password" name="password"
-								class=""><br><br>
+								class="input"><br><br>
 					</div>
 					<div class="">
 						<div class="">
 							<input type="submit" name="login-submit" id="login-submit"
-									class="">
-							
+									class="btn">
 						</div>
 					</div>
 				</div>
 			</form>
 			
-		</fieldset>
-
+			<a class="home" th:href="@{/}"> &laquo; Home</a>
 	</body>
 </html> 

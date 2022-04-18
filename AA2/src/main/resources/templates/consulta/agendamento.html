@@ -6,12 +6,59 @@
 	
 	<head>
 		<title th:text="#{appointment.schedule}"></title>
+		<style>
+			body {
+				font-family: sans-serif;
+				box-sizing: border-box;
+			}
+			h1 {
+				text-align: center;
+				margin-top: 16px;
+				margin-bottom: 50px;
+			}
+			.home {
+				text-decoration: none;
+				font-size: 20px;
+				color: #000;
+				position: absolute;
+				top: 15px;
+				left: 15px;
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+  				align-items: center;
+  				justify-content: center;
+			}
+			.container label {
+				margin-left: 10px;
+			}
+			.input {
+				margin: 8px 10px;
+				border: 1px solid #DCDCDC;
+				padding: 8px 16px;
+				width: 200px;
+				border-radius: 8px;
+			}
+			.btn {
+				text-align: center;
+				color: #000;
+				background-color: #DCDCDC;
+				border: 1px solid #DCDCDC;
+				padding: 10px 16px;
+				width: 150px;
+				border-radius: 10px;
+				font-size: 16px;
+				cursor: pointer;
+		 		margin-top: 10px;
+			}
+		</style>
 	</head>
 	
 	<body>
 		<h1 th:text="#{appointment.schedule}"></h1>
 		
-		<form th:action="@{/consultas/salvar}" th:object="${appointment}" method="POST">
+		<form class="container" th:action="@{/consultas/salvar}" th:object="${appointment}" method="POST">
 			<label for="data" th:text="#{appointment.date}" ></label>:
 			<input type="date" id="data" autofocus="autofocus" th:field="*{dateAppointment}" th:classappend="${#fields.hasErrors('dateAppointment')} ? is-invalid"/>
 			<br><br>
@@ -34,5 +81,6 @@
 			<input type="hidden" name="idProfessional" th:value="${professional.id}"/>
 			<input type="submit" class="submit" th:value="#{confirm.text}" />
 		</form>
+		 <a class="home" th:href="@{/}"> &laquo; Home</a>
 	</body>
 </html>

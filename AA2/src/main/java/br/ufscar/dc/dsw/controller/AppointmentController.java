@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -70,6 +71,8 @@ public class AppointmentController {
 		UsuarioDetails user = (UsuarioDetails)authentication.getPrincipal();
 		return profService.buscarPorId(user.getId());
 	}
+	
+	UUID uuid = UUID.randomUUID();
 
 	void sendEmailClient(Appointment appointment) {
 
