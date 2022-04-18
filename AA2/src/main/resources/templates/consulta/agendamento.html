@@ -11,9 +11,9 @@
 	<body>
 		<h1 th:text="#{appointment.schedule}"></h1>
 		
-		<form th:action="@{/consultas/salvar}" th:object="${consulta}" method="POST">
+		<form th:action="@{/consultas/salvar}" th:object="${appointment}" method="POST">
 			<label for="data" th:text="#{appointment.date}" ></label>:
-			<input type="date" id="data" autofocus="autofocus" th:field="*{dateAppointment}" />
+			<input type="date" id="data" autofocus="autofocus" th:field="*{dateAppointment}" th:classappend="${#fields.hasErrors('dateAppointment')} ? is-invalid"/>
 			<br><br>
 			<label th:text="#{appointment.hour}" ></label>:
 			<select th:field="*{hourAppointment}" autofocus="autofocus" th:classappend="${#fields.hasErrors('hourAppointment')} ? is-invalid">
@@ -30,10 +30,8 @@
 				<option th:value="18">18:00</option>
 			</select>
 			<br><br>
-			
-			<input type="hidden" th:field="*{client_id}" th:value="*{client_id}" />
-			<input type="hidden" th:field="*{professional_id}" th:value="*{professional_id}" />
-			
+
+			<input type="hidden" name="idProfessional" th:value="${professional.id}"/>
 			<input type="submit" class="submit" th:value="#{confirm.text}" />
 		</form>
 	</body>

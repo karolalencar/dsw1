@@ -58,7 +58,7 @@ public class Aa2Application {
 			professional1.setPassword(encoder.encode("oi"));
 			professional1.setRole("PROF");
 			professional1.setCpf("50324053826");
-			professional1.setEmail("profissional1@gmail.com");
+			professional1.setEmail("aquila@estudante.ufscar.br");
 			professional1.setExpertise("Terapia Cognitiva");
 			professional1.setKnowledgeArea("Engenharias");
 			professional1.setQualifications("teste");
@@ -110,7 +110,7 @@ public class Aa2Application {
 			client1.setPassword(encoder.encode("abc"));
 			client1.setRole("CLIENT");
 			client1.setCpf("00000000000000");
-			client1.setEmail("client1@gmail.com");
+			client1.setEmail("superaquila00@gmail.com");
 			client1.setTelephone("99999999999");
 			client1.setGender("M");
 			client1.setBirthDate("2010-03-10");

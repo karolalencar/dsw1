@@ -97,7 +97,7 @@
                         </div>
                         <div sec:authorize="hasAuthority('CLIENT')">
                             <td>
-                                <a class="" th:text="#{schedulling.text}" th:href="@{/consultas/agendar/{cpfProf} (cpfProf=${profissional.cpf}) }">             
+                                <a class="" th:text="#{schedulling.text}" th:href="@{/consultas/agendar/{id} (id=${profissional.id}) }">             
                             	</a>
                             </td>
                         </div>
