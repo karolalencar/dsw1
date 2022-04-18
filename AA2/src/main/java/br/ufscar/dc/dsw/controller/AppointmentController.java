@@ -36,7 +36,7 @@ public class AppointmentController {
 	private ProfessionalService professionalService;
 	
 	private boolean horarioDisponivel(Appointment appointment) {
-		List<Appointment> appointments = appointmentService.buscarPorIdProfissional(appointment.getId());
+		List<Appointment> appointments = appointmentService.buscarPorIdProfissional(appointment.getProfessional());
 		
 		for (int i = 0; i < appointments.size(); i++) {
 			if (appointments.get(i).getDate().equals(appointment.getDate()) && appointments.get(i).getHour() == appointment.getHour()) {
@@ -44,7 +44,7 @@ public class AppointmentController {
 			}
 		}
 		
-		appointments = appointmentService.buscarPorIdCliente(appointment.getId());
+		appointments = appointmentService.buscarPorIdCliente(appointment.getClient());
 		
 		for (int i = 0; i < appointments.size(); i++) {
 			if (appointments.get(i).getDate().contentEquals(appointment.getDate()) && appointments.get(i).getHour() == appointment.getHour()) {

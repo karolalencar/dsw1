@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.AppointmentDAO;
 import br.ufscar.dc.dsw.domain.Appointment;
-import br.ufscar.dc.dsw.domain.User;
 import br.ufscar.dc.dsw.service.spec.IAppointmentService;
+import br.ufscar.dc.dsw.domain.Client;
+import br.ufscar.dc.dsw.domain.Professional;
+
 
 @Service
 @Transactional(readOnly = false)
@@ -21,6 +23,10 @@ public class AppointmentService implements IAppointmentService {
 	public void salvar(Appointment appointment) {
 		dao.save(appointment);
 	}
+
+	public void excluir(Long id) {
+		dao.deleteById(id);
+	}
 	
 	@Transactional(readOnly = true)
 	public Appointment buscarPorId(Long id) {
@@ -28,17 +34,17 @@ public class AppointmentService implements IAppointmentService {
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Appointment> buscarTodosPorUsuario(User u) {
-		return dao.findAllByUser(u);
+	public List<Appointment> buscarTodosPorUsuario() {
+		return dao.findAll();
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Appointment> buscarPorIdCliente(Long client_id) {
-		return dao.findByIdClient(client_id);
+	public List<Appointment> buscarPorIdCliente(Client client) {
+		return dao.findByClient(client);
 	}
 	
 	@Transactional(readOnly = true)
-	public List<Appointment> buscarPorIdProfissional(Long professional_id) {
-		return dao.findByIdProfessional(professional_id);
+	public List<Appointment> buscarPorIdProfissional(Professional professional) {
+		return dao.findByProfessional(professional);
 	}
 }

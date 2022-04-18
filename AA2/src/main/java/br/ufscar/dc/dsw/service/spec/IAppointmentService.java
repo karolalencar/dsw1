@@ -3,7 +3,9 @@ package br.ufscar.dc.dsw.service.spec;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Appointment;
-import br.ufscar.dc.dsw.domain.User;
+import br.ufscar.dc.dsw.domain.Client;
+import br.ufscar.dc.dsw.domain.Professional;
+
 
 public interface IAppointmentService {
 
@@ -11,9 +13,9 @@ public interface IAppointmentService {
 	
 	void salvar(Appointment appointment);
 	
-	List<Appointment> buscarTodosPorUsuario(User u);
+	List<Appointment> buscarTodosPorUsuario();
 	
-	List<Appointment> buscarPorIdCliente(Long client_id);
+	List<Appointment> buscarPorIdCliente(Client client);
 	
-//	List<Appointment> buscarPorIdProfissional(Long professional_id);
+	List<Appointment> buscarPorIdProfissional(Professional professional);
 }
