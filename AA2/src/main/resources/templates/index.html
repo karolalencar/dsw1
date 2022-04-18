@@ -44,6 +44,9 @@
 			<a th:href="@{/professionals/listar}">
 				<span class="" th:text="#{professionals_text}"></span>
 			</a>
+			<a th:href="@{/consultas/listar}">
+				<span th:text="#{appointments.list}"></span>
+			</a>
 		</div>
 		<div class="menu-unauthenticated" sec:authorize="!isAuthenticated()">
 			<a th:href="@{/professionals/listar}">

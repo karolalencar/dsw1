@@ -5,22 +5,29 @@
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 	
 	<head>
-		<title></title>
+		<title th:text="#{appointments.list}"></title>
+		<style>
+            table, th, td {
+               border: 1px solid black;
+            }
+         </style>
 	</head>
 	
 	<body>
-		<h1></h1>
+		<h1 align="center" style="margin-bottom: 50px;" th:text="#{appointments.list}"></h1>
 		
 		<div align="center">
             <table class="">
                 <thead>
                     <tr>
-                        <th th:text="#{date.label}"></th>
+                        <th th:text="#{appointment.date}"></th>
+                        <th th:text="#{appointment.hour}"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="consulta : ${consultas}">
-                        <td th:text="${consulta.id}"></td>
+                        <td th:text="${consulta.date}"></td>
+                        <td th:text="${consulta.hour}"></td>
                     </tr>
                 </tbody>
             </table>
