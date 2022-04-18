@@ -71,6 +71,9 @@
                         <div sec:authorize="hasAuthority('ADMIN')">
                             <th th:text="#{action.label}"></th>
                         </div>
+                        <div sec:authorize="hasAuthority('CLIENT')">
+                            <th th:text="#{action.label}"></th>
+                        </div>
                     </tr>
                 </thead>
                 <tbody>
@@ -87,10 +90,15 @@
                         <div sec:authorize="hasAuthority('ADMIN')">
                             <td>
                                 <a class="" th:text="#{edit_text}" th:href="@{/professionals/editar/{id} (id=${profissional.id}) }">             
-                            </a>
-                            <a class="" th:text="#{remove_text}" th:href="@{/professionals/excluir/{id} (id=${profissional.id}) }">             
-                            </a>
-                            
+                            	</a>
+                            	<a class="" th:text="#{remove_text}" th:href="@{/professionals/excluir/{id} (id=${profissional.id}) }">             
+                            	</a>
+                            </td>
+                        </div>
+                        <div sec:authorize="hasAuthority('CLIENT')">
+                            <td>
+                                <a class="" th:text="#{schedulling.text}" th:href="@{/consultas/agendar/{id} (id=${profissional.id}) }">             
+                            	</a>
                             </td>
                         </div>
                     </tr>

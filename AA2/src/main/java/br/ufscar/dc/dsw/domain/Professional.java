@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -39,9 +40,7 @@ public class Professional extends User {
 	@Column(nullable = false, length = 50)
 	private String expertise;
 
-	
-
-	@OneToMany(mappedBy = "professional")
+	@OneToMany(mappedBy = "professional", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Appointment> appointments;
 	
 	public String getCpf() {

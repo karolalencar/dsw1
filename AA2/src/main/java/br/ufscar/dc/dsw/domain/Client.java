@@ -2,6 +2,7 @@ package br.ufscar.dc.dsw.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -9,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Client")
 public class Client extends User {
@@ -37,7 +39,7 @@ public class Client extends User {
 	@Column(nullable = false, unique = false, length = 60)
 	private String birthDate;
 
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Appointment> appointments;
 	
 	public String getCpf() {
