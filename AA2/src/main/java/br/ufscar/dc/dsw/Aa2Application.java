@@ -54,7 +54,6 @@ public class Aa2Application {
 			professional2.setEmail("profissional2@gmail.com");
 			professional2.setExpertise("Biologia e Espaço Tridimensional");
 			professional2.setKnowledgeArea("Ciências Biológicas");
-			//professional2.setQualifications("teste");
 			professional2.setEnabled(true);
 			professional2.setFilename("teste");
 			usuarioDAO.save(professional2);
