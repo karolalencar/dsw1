@@ -72,25 +72,25 @@ public class AppointmentController {
 		return profService.buscarPorId(user.getId());
 	}
 	
-	UUID uuid = UUID.randomUUID();
+
 
 	void sendEmailClient(Appointment appointment) {
-
+		UUID uuid = UUID.randomUUID();
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(appointment.getClient().getEmail());
         msg.setSubject("Consulta Marcada");
-        msg.setText("Olá "+ appointment.getClient().getName() +", sua consulta foi marcada com o profissional "+ appointment.getProfessional().getName()+" as "+ appointment.getHourAppointment()+"h do dia "+appointment.getDateAppointment()+".");
+        msg.setText("Olá "+ appointment.getClient().getName() +", sua consulta foi marcada com o profissional "+ appointment.getProfessional().getName()+" as "+ appointment.getHourAppointment()+"h do dia "+appointment.getDateAppointment()+".\n O link para a consulta é: https://meet.google.com/"+ uuid);
 
         javaMailSender.send(msg);
 
     }
 
 	void sendEmailProf(Appointment appointment) {
-
+		UUID uuid = UUID.randomUUID();
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(appointment.getProfessional().getEmail());
         msg.setSubject("Consulta Marcada");
-        msg.setText("Olá "+ appointment.getProfessional().getName() +", uma consulta foi marcada com o cliente "+ appointment.getClient().getName()+" as "+ appointment.getHourAppointment()+"h do dia "+appointment.getDateAppointment()+".");
+        msg.setText("Olá "+ appointment.getProfessional().getName() +", uma consulta foi marcada com o cliente "+ appointment.getClient().getName()+" as "+ appointment.getHourAppointment()+"h do dia "+appointment.getDateAppointment()+".\n O link para a consulta é: https://meet.google.com/"+ uuid);
 
         javaMailSender.send(msg);
 
