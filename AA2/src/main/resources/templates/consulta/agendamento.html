@@ -59,27 +59,30 @@
 		<h1 th:text="#{appointment.schedule}"></h1>
 		
 		<form class="container" th:action="@{/consultas/salvar}" th:object="${appointment}" method="POST">
-			<label for="data" th:text="#{appointment.date}" ></label>:
-			<input type="date" id="data" autofocus="autofocus" th:field="*{dateAppointment}" th:classappend="${#fields.hasErrors('dateAppointment')} ? is-invalid"/>
-			<br><br>
-			<label th:text="#{appointment.hour}" ></label>:
-			<select th:field="*{hourAppointment}" autofocus="autofocus" th:classappend="${#fields.hasErrors('hourAppointment')} ? is-invalid">
-				<option th:value="8" selected>08:00</option>
-				<option th:value="9">09:00</option>
-				<option th:value="10">10:00</option>
-				<option th:value="11">11:00</option>
-				<option th:value="12">12:00</option>
-				<option th:value="13">13:00</option>
-				<option th:value="14">14:00</option>
-				<option th:value="15">15:00</option>
-				<option th:value="16">16:00</option>
-				<option th:value="17">17:00</option>
-				<option th:value="18">18:00</option>
-			</select>
-			<br><br>
+			<div>
+				<label for="data" th:text="#{appointment.date}" ></label><br>
+				<input class="input" type="date" id="data" autofocus="autofocus" th:field="*{dateAppointment}" th:classappend="${#fields.hasErrors('dateAppointment')} ? is-invalid"/>
+			</div>
+
+			<div>
+				<label th:text="#{appointment.hour}" ></label><br>
+				<select class="input" th:field="*{hourAppointment}" autofocus="autofocus" th:classappend="${#fields.hasErrors('hourAppointment')} ? is-invalid">
+					<option th:value="8" selected>08:00</option>
+					<option th:value="9">09:00</option>
+					<option th:value="10">10:00</option>
+					<option th:value="11">11:00</option>
+					<option th:value="12">12:00</option>
+					<option th:value="13">13:00</option>
+					<option th:value="14">14:00</option>
+					<option th:value="15">15:00</option>
+					<option th:value="16">16:00</option>
+					<option th:value="17">17:00</option>
+					<option th:value="18">18:00</option>
+				</select>
+			</div>
 
 			<input type="hidden" name="idProfessional" th:value="${professional.id}"/>
-			<input type="submit" class="submit" th:value="#{confirm.text}" />
+			<input type="submit" class="btn" th:value="#{confirm.text}" />
 		</form>
 		 <a class="home" th:href="@{/}"> &laquo; Home</a>
 	</body>
