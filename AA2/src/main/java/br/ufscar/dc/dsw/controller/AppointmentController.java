@@ -74,8 +74,7 @@ public class AppointmentController {
 	
 
 
-	void sendEmailClient(Appointment appointment) {
-		UUID uuid = UUID.randomUUID();
+	void sendEmailClient(Appointment appointment, UUID uuid) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(appointment.getClient().getEmail());
         msg.setSubject("Consulta Marcada");
@@ -85,8 +84,8 @@ public class AppointmentController {
 
     }
 
-	void sendEmailProf(Appointment appointment) {
-		UUID uuid = UUID.randomUUID();
+	void sendEmailProf(Appointment appointment, UUID uuid) {
+		
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(appointment.getProfessional().getEmail());
         msg.setSubject("Consulta Marcada");
@@ -152,8 +151,9 @@ public class AppointmentController {
 		appointment.setProfessional(professional);
 		appointment.setClient(getClientAutenticado());
 		if (! horarioDisponivel(appointment)) {
-			sendEmailClient(appointment);
-			sendEmailProf(appointment);
+			UUID uuid = UUID.randomUUID();
+			sendEmailClient(appointment, uuid);
+			sendEmailProf(appointment, uuid);
 			appointmentService1.salvar(appointment);
 			attr.addFlashAttribute("sucess", "Consulta agendada com sucesso");
 			return "redirect:/consultas/listarClient";
