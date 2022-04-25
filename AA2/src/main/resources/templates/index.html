@@ -5,19 +5,127 @@
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 
 	<head>
-		<title></title>
-		<link th:href="" rel="stylesheet" />
+		<title>Home</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				box-sizing: border-box;
+			}
+			a {
+				text-decoration: none;
+				color: #000;
+			}
+			h1, .hello {
+				text-align: center;
+				margin-bottom: 50px;
+			}
+			.menu-unauthenticated, .menu-client {
+				display: flex;
+				flex-direction: column;
+  				align-items: center;
+  				justify-content: center;
+				gap: 8px;
+			}
+			.menu-unauthenticated a, .menu-client a {
+				text-decoration: none;
+				text-align: center;
+				color: #000;
+				background-color: #DCDCDC;
+				border: 1px solid #DCDCDC;
+				padding: 16px;
+				width: 200px;
+				border-radius: 10px;
+			}
+			.btn {
+				text-align: center;
+				color: #000;
+				background-color: #DCDCDC;
+				border: 1px solid #DCDCDC;
+				padding: 10px 16px;
+				width: 150px;
+				border-radius: 10px;
+				font-size: 16px;
+				cursor: pointer;
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				gap: 8px;
+			}
+			.menu-cliente {
+				display: flex;
+				flex-direction: column;
+			}
+		</style>
 	</head>
 	
 	<body>
-		<h1 th:text="#{}"></h1>
-		<h2 th:text="#{}"></h2>
-		<a th:href="@{}">
-			<span class="" th:text="#{}"></span>
-		</a>
-		<a th:href="@{}">
-			<span class="" th:text="#{}"></span>
-		</a>
+		<h1 th:text="#{home}"></h1>
+		
+		<div class="hello" sec:authorize="isAuthenticated()">
+			<h2>
+				<span th:text="#{index.hello}"></span>
+				<span th:inline="text">[[${#httpServletRequest.remoteUser}]]!</span>
+			</h2>
+		</div>
+
+		<div class="container">
+	
+			<div class="btn" sec:authorize="hasAuthority('ADMIN')">
+				<a th:href="@{/professionals/listar}">
+					<span th:text="#{professionals_text}"></span>
+				</a>
+			</div>
+			
+			<div class="btn" sec:authorize="hasAuthority('ADMIN')">
+				<a th:href="@{/clientes/listar}">
+					<span class="" th:text="#{clients.text}"></span>
+				</a>
+			</div>
+	
+			<div class="menu-client" sec:authorize="hasAuthority('CLIENT')">
+				<a th:href="@{/professionals/listar}">
+					<span class="" th:text="#{professionals_text}"></span>
+				</a>
+				<a th:href="@{/consultas/listarClient}">
+					<span class="" th:text="#{appointment_text}"></span>
+				</a>
+			</div>
+	
+			<div class="btn" sec:authorize="hasAuthority('PROF')">
+				<a th:href="@{/consultas/listarProf}">
+					<span class="" th:text="#{appointment_text}"></span>
+				</a>
+			</div>
+	
+			<div class="menu-unauthenticated" sec:authorize="!isAuthenticated()">
+				<a th:href="@{/professionals/listar}">
+					<span class="" th:text="#{professionals_text}"></span>
+				</a>
+				<a th:href="@{/login}">
+					<span class="" th:text="#{logon_text}"></span>
+				</a>
+				<a th:href="@{/professionals/cadastrar}">
+					<span class="" th:text="#{cadastro_prof_text}"></span>
+				</a>
+				<a th:href="@{/clientes/cadastrar}">
+					<span class="" th:text="#{client.register}"></span>
+				</a>
+			</div>
+	
+			<div sec:authorize="isAuthenticated()">
+	            <form th:action="@{/logout}" method="post">
+	                <div >
+	                    <div >
+	                        <input class="btn" type="submit" name="login-submit" id="login-submit"
+	                            value="Logout">
+	                    </div>
+	                </div>
+	            </form>
+	        </div>
+		</div>
 	
 	</body>
 </html>

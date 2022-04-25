@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+	
+	<head>
+		<title th:text="#{appointment.schedule}"></title>
+		<style>
+			body {
+				font-family: sans-serif;
+				box-sizing: border-box;
+			}
+			h1 {
+				text-align: center;
+				margin-top: 16px;
+				margin-bottom: 50px;
+			}
+			.home {
+				text-decoration: none;
+				font-size: 20px;
+				color: #000;
+				position: absolute;
+				top: 15px;
+				left: 15px;
+			}
+			.container {
+				display: flex;
+				flex-direction: column;
+  				align-items: center;
+  				justify-content: center;
+			}
+			.container label {
+				margin-left: 10px;
+			}
+			.input {
+				margin: 8px 10px;
+				border: 1px solid #DCDCDC;
+				padding: 8px 16px;
+				width: 200px;
+				border-radius: 8px;
+			}
+			.btn {
+				text-align: center;
+				color: #000;
+				background-color: #DCDCDC;
+				border: 1px solid #DCDCDC;
+				padding: 10px 16px;
+				width: 150px;
+				border-radius: 10px;
+				font-size: 16px;
+				cursor: pointer;
+		 		margin-top: 10px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<h1 th:text="#{appointment.schedule}"></h1>
+		
+		<form class="container" th:action="@{/consultas/salvar}" th:object="${appointment}" method="POST">
+			<div>
+				<label for="data" th:text="#{appointment.date}" ></label><br>
+				<input class="input" type="date" id="data" autofocus="autofocus" th:field="*{dateAppointment}" th:classappend="${#fields.hasErrors('dateAppointment')} ? is-invalid"/>
+			</div>
+
+			<div>
+				<label th:text="#{appointment.hour}" ></label><br>
+				<select class="input" th:field="*{hourAppointment}" autofocus="autofocus" th:classappend="${#fields.hasErrors('hourAppointment')} ? is-invalid">
+					<option th:value="8" selected>08:00</option>
+					<option th:value="9">09:00</option>
+					<option th:value="10">10:00</option>
+					<option th:value="11">11:00</option>
+					<option th:value="12">12:00</option>
+					<option th:value="13">13:00</option>
+					<option th:value="14">14:00</option>
+					<option th:value="15">15:00</option>
+					<option th:value="16">16:00</option>
+					<option th:value="17">17:00</option>
+					<option th:value="18">18:00</option>
+				</select>
+			</div>
+
+			<input type="hidden" name="idProfessional" th:value="${professional.id}"/>
+			<input type="submit" class="btn" th:value="#{confirm.text}" />
+		</form>
+		 <a class="home" th:href="@{/}"> &laquo; Home</a>
+	</body>
+</html>

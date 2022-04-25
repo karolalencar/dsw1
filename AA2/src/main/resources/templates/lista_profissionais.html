@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+	<head>
+		<title th:text="#{professionals_text}"></title>
+        <style>
+            table, th, td {
+               border: 1px solid black;
+            }
+            .home {
+				text-decoration: none;
+				font-size: 20px;
+				color: #000;
+				position: absolute;
+				top: 15px;
+				left: 15px;
+			}
+			.add-prof {
+				margin-bottom: 10px;
+			}
+         </style>
+	</head>
+	
+	<body>
+
+        <div align="center" th:if="${sucess} != null">
+            <span> <strong style="color: green;"th:text="${sucess}"></strong> </span>
+        </div>
+        <div align="center" th:if="${fail} != null">
+            <span> <strong style="color: red;"th:text="${fail}"></strong> </span>
+        </div>
+
+		<h1 align="center" style="margin-bottom: 50px;" th:text="#{list_professionals_text}"></h1>
+		
+		<div align="center" class="add-prof" sec:authorize="hasAuthority('ADMIN')">
+        	<a th:text="#{prof.add}" th:href="@{/professionals/cadastrar}">             
+        	</a>
+        </div>
+
+        <div align="center">
+            <form name='form' action="/professionals/listar" method="get">
+                <table>
+                    <tr>
+                        <td>Área de Conhecimento</td>
+                        <td>
+                            <select id = 'knowledgeArea' name='knowledgeArea'>
+                                <option value='--'>--</option>
+                                <option value="Ciências Exatas e da Terra">Ciências Exatas e da Terra</option>
+                                <option value="Ciências Biológicas">Ciências Biológicas</option>
+                                <option value="Engenharias">Engenharias</option>
+                                <option value="Ciências da Saúde">Ciências da Saúde</option>
+                                <option value="Ciências Agrárias">Ciências Agrárias</option>
+                                <option value="Linguística, Letras e Artes">Linguística, Letras e Artes</option>
+                                <option value="Ciências Sociais Aplicadas">Ciências Sociais Aplicadas</option>
+                                <option value="Ciências Humanas">Ciências Humanas</option>
+                            </select>   
+                        </td>
+                    </tr>
+                    <tr id='expertise'>    
+                        <td>Expertise</td>
+                        <td>
+                            <select name="expertise">
+                                <option value="">--</option>
+                                <span th:each="expertise : ${expertises}">
+                                    <option th:value="${expertise}" th:text="${expertise}"></option>
+                                </span>
+                            </select>
+                        </td>   
+                    </tr>
+                </table>
+                <input style="margin-top:10px" type="submit" th:value="#{filter.text}">
+            </form>
+            <form style="margin:10px" name='form-button-clear' action="/professionals/listar" >
+                <input type="submit" th:value='#{clear.filter.text}' >
+            </form>
+        </div>
+
+
+        <div align="center">
+            <table class="">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th th:text="#{professional.cpf.label}"></th>
+                        <th th:text="#{professional.email.label}"></th>
+                        <th th:text="#{professional.name.label}"></th>
+                        <!--<th th:text="#{professional.password.label}"></th>-->
+                        <!--<th th:text="#{professional.role.label}"></th>-->
+                        <th th:text="#{professional.expertise.label}"></th>
+                        <th th:text="#{professional.knowledgeArea.label}"></th>
+                        <th th:text="#{professional.qualifications.label}"></th>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                            <th th:text="#{action.label}"></th>
+                        </div>
+                        <div sec:authorize="hasAuthority('CLIENT')">
+                            <th th:text="#{action.label}"></th>
+                        </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="profissional : ${profissionais}">
+                        <td th:text="${profissional.id}"></td>
+                        <td th:text="${profissional.cpf}"></td>
+                        <td th:text="${profissional.email}"></td>
+                        <td th:text="${profissional.name}"></td>
+                        <!--<td th:text="${profissional.password}"></td>-->
+                        <!--<td th:text="${profissional.role}"></td>-->
+                        <td th:text="${profissional.expertise}"></td>
+                        <td th:text="${profissional.knowledgeArea}"></td>
+                        <td style="text-align: center"><a th:href="@{/professionals/download/{id} (id=${profissional.id}) }" th:text="${profissional.filename}"></a></td>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                            <td>
+                                <a class="" th:text="#{edit_text}" th:href="@{/professionals/editar/{id} (id=${profissional.id}) }">             
+                            	</a>
+                            	<a class="" th:text="#{remove_text}" th:href="@{/professionals/excluir/{id} (id=${profissional.id}) }">             
+                            	</a>
+                            </td>
+                        </div>
+                        <div sec:authorize="hasAuthority('CLIENT')">
+                            <td>
+                                <a class="" th:text="#{schedulling.text}" th:href="@{/consultas/agendar/{id} (id=${profissional.id}) }">             
+                            	</a>
+                            </td>
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="home" th:href="@{/}"> &laquo; Home</a>
+	
+	</body>
+</html>

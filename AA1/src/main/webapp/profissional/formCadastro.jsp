@@ -36,7 +36,7 @@
 				</h2>
 			</div>
 			<div>
-				<form action="/<%= contextPath%>/profissionais/insercao" method="post">
+				<form action="/<%=contextPath%>/profissionais/insercao" method="post">
 					<fieldset>
 						<legend>
 							<fmt:message key="professional_registration"/>
@@ -72,17 +72,7 @@
 						<label><fmt:message key="qualification" /> </label>
 						<input type="text" name="qualification" /> <br>
 						
-						<!--  <div>
-							<form action="pdf/insercao" enctype="multipart/form-data" method="post">
-							<br/>
-								Digite o nome do PDF:
-								<input type="text" name="name"/> <br/><br/>
-								Coloque seu PDF:
-								<input name="upload" type="file" accept=".pdf"> <br/>
-								<input type="submit" name="enviar" value="Enviar" />
-							</form>	
-						</div>
-						-->
+			
 						<input type="submit" name="enviar" value="<fmt:message key="register"/>" />
 					</fieldset>
 				</form>

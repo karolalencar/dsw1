@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+<head>
+    <title th:text="#{cadastro.prof.text}"></title>
+    <style>
+    	h1 {
+				text-align: center;
+				margin-top: 16px;
+				margin-bottom: 50px;
+		}
+		select {
+				padding: 6px 12px;
+				width: 220px;
+				margin-top: 4px;
+				margin-bottom: 8px;
+			}
+		.home {
+			text-decoration: none;
+			font-size: 20px;
+			color: #000;
+			position: absolute;
+			top: 15px;
+			left: 15px;
+		}
+		.container {
+			display: flex;
+			flex-direction: column;
+  			align-items: center;
+  			justify-content: center;
+		}
+		.container label {
+				margin-left: 10px;
+			}
+			.input {
+				margin: 8px 10px;
+				border: 1px solid #DCDCDC;
+				padding: 8px 16px;
+				width: 200px;
+				border-radius: 8px;
+			}
+			.btn {
+				text-align: center;
+				color: #000;
+				background-color: #DCDCDC;
+				border: 1px solid #DCDCDC;
+				padding: 10px 16px;
+				width: 150px;
+				border-radius: 10px;
+				font-size: 16px;
+				cursor: pointer;
+				margin-top: 10px;
+			}
+    </style>
+</head>
+
+<body>
+    <h1 th:text="#{cadastro.prof.text}"></h1>
+
+    <form class="container" th:action="@{/professionals/editar}"  th:object="${professional}" method="POST" enctype="multipart/form-data">
+            <div>
+            	<label th:text="#{nome.text}"></label><br>
+            	<input class="input" type="text" name="nome" th:placeholder="#{nome.text}" th:field="*{name}"
+            th:classappend="${#fields.hasErrors('name')} ? is-invalid" />
+            </div>
+
+            <div>
+            	<label th:text="#{user.label}"></label><br>
+            	<input class="input" type="text" name="username" th:placeholder="#{user.label}" th:field="*{username}"
+            th:classappend="${#fields.hasErrors('username')} ? is-invalid"/>
+            </div>
+
+            <div>
+            	<label th:text="#{cpf.text}"></label><br>
+            	<input class="input" type="text" name="cpf" th:placeholder="#{cpf.text}" th:field="*{cpf}" value="${professional.cpf}" readonly
+            th:classappend="${#fields.hasErrors('cpf')} ? is-invalid"/>
+            </div>
+
+            <div>
+            	<label th:text="#{email.text}"></label><br>
+            	<input class="input" type="text" name="email" th:placeholder="#{email.text}" th:field="*{email}"
+            th:classappend="${#fields.hasErrors('email')} ? is-invalid"/>
+            </div>
+
+            <div>
+            	<label th:text="#{senha.label}"></label><br>
+            	<input class="input" type="password" name="senha" th:placeholder="#{senha.label}" th:field="*{password}"
+            th:classappend="${#fields.hasErrors('password')} ? is-invalid"/>
+            </div>
+
+            <div>
+            	<label th:text="#{professional.knowledgeArea.label}"></label><br>
+	            <select name="knowledgeArea" id="knowledgeArea" th:field="*{knowledgeArea}" th:classappend="${#fields.hasErrors('knowledgeArea')} ? is-invalid">
+	                <option value="Ciências Exatas e da Terra">Ciências Exatas e da Terra</option>
+	                <option value="Ciências Biológicas">Ciências Biológicas</option>
+	                <option value="Engenharias">Engenharias</option>
+	                <option value="Ciências da Saúde">Ciências da Saúde</option>
+	                <option value="Ciências Agrárias">Ciências Agrárias</option>
+	                <option value="Linguística, Letras e Artes">Linguística, Letras e Artes</option>
+	                <option value="Ciências Sociais Aplicadas">Ciências Sociais Aplicadas</option>
+	                <option value="Ciências Humanas">Ciências Humanas</option>
+	            </select>
+            </div>
+            
+            <div>
+            	<label th:text="#{professional.expertise.label}"></label><br>
+            	<input class="input" type="text" name="expertise" th:placeholder="#{professional.expertise.label}" th:field="*{expertise}"
+            th:classappend="${#fields.hasErrors('expertise')} ? is-invalid"/>
+            </div>
+
+            <div>
+            	<label th:text="#{professional.qualifications.label}"></label><br>
+            	<input class="input" type="file" name="file" accept="application/pdf" th:placeholder="#{professional.qualifications.label}" />
+            </div>
+            
+            <input type="hidden" id="id" th:field="*{id}" />
+            <input type="submit" class="btn" th:value="#{submit.text}"/> 
+    </form>
+    <a class="home" th:href="@{/}"> &laquo; Home</a>
+</body>
+
+</html>

@@ -8,6 +8,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "Appointment")
 public class Appointment extends AbstractEntity<Long> {
@@ -44,19 +45,19 @@ public class Appointment extends AbstractEntity<Long> {
 		this.professional = professional;
 	}
 
-    public String getDate() {
+    public String getDateAppointment() {
 		return dateAppointment;
 	}
 
-	public void setDate(String date) {
+	public void setDateAppointment(String date) {
 		this.dateAppointment = date;
 	}
 
-    public int getHour() {
+    public int getHourAppointment() {
 		return hourAppointment;
 	}
 
-	public void setHour(int hour) {
+	public void setHourAppointment(int hour) {
 		this.hourAppointment = hour;
 	}
 }

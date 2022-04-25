@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+
+	<head>
+		<title th:text="#{clients.text}"></title>
+        <style>
+            table, th, td {
+               border: 1px solid black;
+            }
+            .add-client {
+            	margin-bottom: 10px;
+            }
+            .home {
+				text-decoration: none;
+				font-size: 20px;
+				color: #000;
+				position: absolute;
+				top: 15px;
+				left: 15px;
+			}
+         </style>
+	</head>
+	
+	<body>
+
+        <div align="center" th:if="${sucess} != null">
+            <span> <strong style="color: green;"th:text="${sucess}"></strong> </span>
+        </div>
+        <div align="center" th:if="${fail} != null">
+            <span> <strong style="color: red;"th:text="${fail}"></strong> </span>
+        </div>
+
+		<h1 align="center" style="margin-bottom: 50px;" th:text="#{client.list}"></h1>
+		
+		<div align="center" class="add-client">
+			<a th:text="#{client.add}" th:href="@{/clientes/cadastrar}">             
+        	</a>
+		</div>
+		
+        <div align="center">
+            <table class="">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th th:text="#{cpf.label}"></th>
+                        <th th:text="#{email.label}"></th>
+                        <th th:text="#{name.label}"></th>
+                        <th th:text="#{password.label}"></th>
+                        <th th:text="#{role.label}"></th>
+                        <th th:text="#{telephone.label}"></th>
+                        <th th:text="#{gender.label}"></th>
+                        <th th:text="#{birthdate.label}"></th>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                            <th th:text="#{action.label}"></th>
+                        </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="cliente : ${clientes}">
+                        <td th:text="${cliente.id}"></td>
+                        <td th:text="${cliente.cpf}"></td>
+                        <td th:text="${cliente.email}"></td>
+                        <td th:text="${cliente.name}"></td>
+                        <td th:text="${cliente.password}"></td>
+                        <td th:text="${cliente.role}"></td>
+                        <td th:text="${cliente.telephone}"></td>
+                        <td th:text="${cliente.gender}"></td>
+                        <td th:text="${cliente.birthDate}"></td>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                            <td>
+                                <a class="" th:text="#{edit_text}" th:href="@{/clientes/editar/{id} (id=${cliente.id}) }">             
+                            	</a>
+                            	<a class="" th:text="#{remove_text}" th:href="@{/clientes/excluir/{id} (id=${cliente.id}) }">             
+                            	</a>
+                            </td>
+                        </div>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+         <a class="home" th:href="@{/}"> &laquo; Home</a>
+	</body>
+	
+</html>

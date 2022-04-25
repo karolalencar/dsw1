@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
+	
+	<head>
+		<title th:text="#{appointment_text}"></title>
+        <style>
+            table, th, td {
+               border: 1px solid black;
+            }
+            .home {
+				text-decoration: none;
+				font-size: 20px;
+				color: #000;
+				position: absolute;
+				top: 15px;
+				left: 15px;
+			}
+         </style>
+	</head>
+	
+	<body>
+		<div align="center">
+            <h1 th:text="#{appointment_text}" style="border:width"></h1>
+            <table class="">
+                <thead>
+                    <tr>
+                        <!--<th>ID</th>-->
+                        <th th:text="#{appointment.hour}"></th>
+                        <th th:text="#{appointment.date}"></th>
+                        <th th:text="#{prof.label}"></th>
+                        <th th:text="#{client.label}"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="consulta : ${consultas}">
+                        <!--<td th:text="${consulta.id}"></td>-->
+                        <td th:text="${consulta.hourAppointment}"></td>
+                        <td th:text="${consulta.dateAppointment}"></td>
+                        <td th:text="${consulta.professional.name}"></td>
+                        <td th:text="${consulta.client.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a class="home" th:href="@{/}"> &laquo; Home</a>
+	</body>
+	
+</html>
