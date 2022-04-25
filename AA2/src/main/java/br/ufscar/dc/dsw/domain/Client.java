@@ -46,8 +46,8 @@ public class Client extends User {
 		return cpf;
 	}
 
-	public void setCpf(String Cpf) {
-		this.cpf = Cpf;
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getEmail() {

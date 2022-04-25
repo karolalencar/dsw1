@@ -55,9 +55,9 @@
 	</head>
 	
 	<body>
-		<h1 th:text="#{client.register}"></h1>
+		 <h1 th:text="#{client.register}"></h1>
 		
-		<form class="container" th:action="@{/clientes/salvar}" th:object="${client}" method="post">
+		<form class="container" th:action="@{/clientes/salvar}" th:object="${client}" method="POST">
 				<div>
 					<label th:text="#{nome.text}"></label><br>
 					<input class="input" type="text" name="nome" th:placeholder="#{nome.text}" th:field="*{name}" th:classappend="${#fields.hasErrors('name')} ? is-invalid" />

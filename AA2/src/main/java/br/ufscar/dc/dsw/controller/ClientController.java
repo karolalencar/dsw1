@@ -31,6 +31,7 @@ public class ClientController {
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Client client) {
+
 		return "cliente/cadastro";
 	}
 	
@@ -44,10 +45,11 @@ public class ClientController {
 	
 	@PostMapping("/salvar")
 	public String salvar(@Valid Client client, BindingResult result, RedirectAttributes attr, BCryptPasswordEncoder encoder) {
+
 		if (client.getRole() == null) {
 			client.setRole("CLIENT");
 		}
-		
+
 		if (result.hasErrors()) {
 			return "cliente/cadastro";
 		}
