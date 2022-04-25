@@ -29,6 +29,10 @@ import br.ufscar.dc.dsw.domain.Professional;
 import br.ufscar.dc.dsw.service.spec.IProfessionalService;
 import br.ufscar.dc.dsw.service.spec.IUserService;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import br.ufscar.dc.dsw.security.UsuarioDetails;
+
 @Controller
 @RequestMapping("/professionals")
 public class ProfessionalController {
@@ -85,8 +89,21 @@ public class ProfessionalController {
 
 		professional.setPassword(encoder.encode(professional.getPassword()));
 		userService.salvar(professional);
-
 		attr.addFlashAttribute("sucess", "Profissional inserido com sucesso");
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if(!authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]")){
+			UsuarioDetails user = (UsuarioDetails)authentication.getPrincipal();
+			String role = user.getAuthorities().toString();
+				
+			if(role.equals("[ADMIN]")){
+				
+				return "redirect:/professionals/listar";
+			}
+		}
+
+		
+		
 		return "/login";
 	}
 
@@ -97,14 +114,18 @@ public class ProfessionalController {
 	}
 
     @PostMapping("/editar") // Edita um profissional. Usado pelo admin
-	public String editar(@Valid Professional professional, BindingResult result, RedirectAttributes attr,BCryptPasswordEncoder encoder) {
+	public String editar(@Valid Professional professional, BindingResult result, RedirectAttributes attr,BCryptPasswordEncoder encoder, @RequestParam("file") MultipartFile file) throws IOException {
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		professional.setQualifications(file.getBytes());
+		professional.setFilename(fileName);
+
 		if (professional.getRole() == null) {
 			professional.setRole("PROF");
 		}
 
-		if (result.hasErrors()) {
+		/*if (result.hasErrors()) {
 			return "profissional/edicao";
-		}
+		}*/
 
 		professional.setPassword(encoder.encode(professional.getPassword()));
 		userService.salvar(professional);

@@ -60,7 +60,7 @@
 <body>
     <h1 th:text="#{cadastro.prof.text}"></h1>
 
-    <form class="container" th:action="@{/professionals/editar}"  th:object="${professional}" method="POST">
+    <form class="container" th:action="@{/professionals/editar}"  th:object="${professional}" method="POST" enctype="multipart/form-data">
             <div>
             	<label th:text="#{nome.text}"></label><br>
             	<input class="input" type="text" name="nome" th:placeholder="#{nome.text}" th:field="*{name}"
@@ -113,8 +113,7 @@
 
             <div>
             	<label th:text="#{professional.qualifications.label}"></label><br>
-            	<input class="input" type="text" name="qualifications" th:placeholder="#{professional.qualifications.label}" th:field="*{qualifications}"
-            th:classappend="${#fields.hasErrors('qualifications')} ? is-invalid"/>
+            	<input class="input" type="file" name="file" accept="application/pdf" th:placeholder="#{professional.qualifications.label}" />
             </div>
             
             <input type="hidden" id="id" th:field="*{id}" />

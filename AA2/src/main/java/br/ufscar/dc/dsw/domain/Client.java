@@ -39,7 +39,7 @@ public class Client extends User {
 	@Column(nullable = false, unique = false, length = 60)
 	private String birthDate;
 
-	@OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE, orphanRemoval = false)
 	private List<Appointment> appointments;
 	
 	public String getCpf() {

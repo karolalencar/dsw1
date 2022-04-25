@@ -25,6 +25,14 @@
 	</head>
 	
 	<body>
+
+        <div align="center" th:if="${sucess} != null">
+            <span> <strong style="color: green;"th:text="${sucess}"></strong> </span>
+        </div>
+        <div align="center" th:if="${fail} != null">
+            <span> <strong style="color: red;"th:text="${fail}"></strong> </span>
+        </div>
+
 		<h1 align="center" style="margin-bottom: 50px;" th:text="#{list_professionals_text}"></h1>
 		
 		<div align="center" class="add-prof" sec:authorize="hasAuthority('ADMIN')">

@@ -19,6 +19,10 @@ import br.ufscar.dc.dsw.domain.Client;
 import br.ufscar.dc.dsw.service.spec.IClientService;
 import br.ufscar.dc.dsw.service.spec.IUserService;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import br.ufscar.dc.dsw.security.UsuarioDetails;
+
 @Controller
 @RequestMapping("/clientes")
 public class ClientController {
@@ -57,6 +61,20 @@ public class ClientController {
 		client.setPassword(encoder.encode(client.getPassword()));
 		userService.salvar(client);
 		attr.addFlashAttribute("sucess", "Cliente inserido com sucesso.");
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if(!authentication.getAuthorities().toString().equals("[ROLE_ANONYMOUS]")){
+			UsuarioDetails user = (UsuarioDetails)authentication.getPrincipal();
+			String role = user.getAuthorities().toString();
+				
+			if(role.equals("[ADMIN]")){
+
+				return "redirect:/clientes/listar";
+			}
+		}
+		
+
 		return "/login";
 	}
 	

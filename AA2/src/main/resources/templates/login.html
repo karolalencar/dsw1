@@ -55,6 +55,10 @@
 	<body>
 		<h1>Login</h1>
 		
+			<div align="center" th:if="${param.error}">
+					<span style="color:red"th:text="#{login.error}"></span>
+			</div>
+			
 			<form th:action="@{/login}" method="post">
 				<div class="container">
 					<div class="">

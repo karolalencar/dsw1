@@ -40,7 +40,7 @@ public class Professional extends User {
 	@Column(nullable = false, length = 50)
 	private String expertise;
 
-	@OneToMany(mappedBy = "professional", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	@OneToMany(mappedBy = "professional", cascade = CascadeType.REMOVE, orphanRemoval = false)
 	private List<Appointment> appointments;
 	
 	public String getCpf() {
